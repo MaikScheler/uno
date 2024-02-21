@@ -19,5 +19,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void paintEvent(QPaintEvent *event);
+    void onStartButtonClicked();
 };
 #endif // MAINWINDOW_H
