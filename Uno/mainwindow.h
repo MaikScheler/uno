@@ -24,6 +24,7 @@ signals:
 private:
     void paintEvent(QPaintEvent *event);
     void onStartButtonClicked();
+    void onCardStackButtonClicked();
     Ui::MainWindow *ui;
     MainController *mainController;
 

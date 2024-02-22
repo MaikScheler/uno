@@ -12,6 +12,7 @@ public:
     MainController(QObject* parent = 0);
     ~MainController();
     bool start( QString address, quint16 port );
+    void drawCard();
 
 public slots:
     void startTransfer();
@@ -20,6 +21,7 @@ public slots:
 
 private:
     QTcpSocket *client;
+    int clientId;
 };
 
 #endif // MAINCONTROLLER_H

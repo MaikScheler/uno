@@ -9,6 +9,7 @@ QT += network
 
 SOURCES += \
         main.cpp \
+        player.cpp \
         server.cpp
 
 TRANSLATIONS += \
@@ -22,4 +23,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    player.h \
     server.h

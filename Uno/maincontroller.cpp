@@ -22,7 +22,7 @@ bool MainController::start( QString address, quint16 port )
 
 
 void MainController::startTransfer(){
-    QString str("GET \r\n \r\n");
+    QString str("connect");
     QByteArray ba = str.toLocal8Bit();
     const char *c_str = ba.data();
 
@@ -36,11 +36,35 @@ void MainController::startRead(){
     QTcpSocket *sender = (QTcpSocket* ) QObject::sender();
     sender->read(buffer, sender->bytesAvailable());
 
+    QStringList response = QString::fromLatin1(buffer).split(QRegExp(":"));
+    QString type = response[0];
+    QString _clientId = response[1];
+    QString message = response.count() > 2 ? response[2] : "";
+
     //Empfangenen String zum Debuggen ausgeben
-    qDebug() << buffer;
+    qDebug() << "Type: " << type;
+    qDebug() << "Message: " << message;
+
+    if(type == "connected")
+    {
+        clientId = _clientId.toInt();
+    } else if(type == "card")
+    {
+        qDebug() << message;
+    }
 
     //Empfangenen String auswerten
     //ToDo
+}
+
+void MainController::drawCard()
+{
+    QString _clientId = QString::number(clientId);
+    QString str("draw:" + _clientId);
+    QByteArray ba = str.toLocal8Bit();
+    const char *c_str = ba.data();
+
+    client->write( c_str, str.length()+1 );
 }
 
 void MainController::onError(QAbstractSocket::SocketError) {

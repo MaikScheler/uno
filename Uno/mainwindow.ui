@@ -123,11 +123,30 @@ color: black;</string>
      </widget>
     </widget>
     <widget class="QWidget" name="Game">
+     <widget class="QLabel" name="card_deck_4">
+      <property name="geometry">
+       <rect>
+        <x>600</x>
+        <y>150</y>
+        <width>131</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resource.qrc">:/assets/assets/back.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
      <widget class="QLabel" name="card_deck">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>130</y>
+        <x>570</x>
+        <y>150</y>
         <width>131</width>
         <height>191</height>
        </rect>
@@ -145,8 +164,8 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_2">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>130</y>
+        <x>580</x>
+        <y>150</y>
         <width>131</width>
         <height>191</height>
        </rect>
@@ -164,8 +183,8 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_3">
       <property name="geometry">
        <rect>
-        <x>610</x>
-        <y>130</y>
+        <x>590</x>
+        <y>150</y>
         <width>131</width>
         <height>191</height>
        </rect>
@@ -180,25 +199,27 @@ color: black;</string>
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="card_deck_4">
+     <widget class="QPushButton" name="card_stack_button">
       <property name="geometry">
        <rect>
-        <x>620</x>
-        <y>130</y>
-        <width>131</width>
+        <x>570</x>
+        <y>150</y>
+        <width>161</width>
         <height>191</height>
        </rect>
       </property>
       <property name="text">
        <string/>
       </property>
-      <property name="pixmap">
-       <pixmap resource="resource.qrc">:/assets/assets/back.png</pixmap>
-      </property>
-      <property name="scaledContents">
+      <property name="flat">
        <bool>true</bool>
       </property>
      </widget>
+     <zorder>card_deck</zorder>
+     <zorder>card_deck_2</zorder>
+     <zorder>card_deck_3</zorder>
+     <zorder>card_deck_4</zorder>
+     <zorder>card_stack_button</zorder>
     </widget>
    </widget>
   </widget>

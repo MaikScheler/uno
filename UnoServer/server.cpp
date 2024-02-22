@@ -23,10 +23,17 @@ void Server::acceptConnection()
 {
     //Verbindung annehmen
     client = server->nextPendingConnection();
-    connect(client, SIGNAL(readyRead()), this, SLOT(startRead()));
+    Player *p = new Player();
+    tuple<Player*,int> playerTuple = { p, 1 };
+    clients.push_back(playerTuple);
+    int clientId = p->getId();
+    // connect(client, SIGNAL(readyRead()), this, SLOT(startRead(5)));
+    connect(client, &QTcpSocket::readyRead, this, [this, clientId]() {
+        startRead(clientId);
+    });
 }
 
-void Server::startRead(){
+void Server::startRead(int clientId){
 
     // Dieser Slot wird aufgerufen, sobald der Client Daten an den Server sendet
     // Der Server überprüft, ob es sich um einen GET-Request handelt und sendet ein sehr
@@ -34,25 +41,25 @@ void Server::startRead(){
 
     QTcpSocket *socket = (QTcpSocket* ) QObject::sender();
 
-    if ( socket->canReadLine() )
-    {
-        QStringList tokens = QString( socket->readLine() ).split( QRegExp( "[ \r\n][ \r\n]*" ) );
-        if ( tokens[0] == "GET" )
-        {
-            QTextStream os( socket );
-            os.setAutoDetectUnicode( true );
-            os << "HTTP/1.0 200 Ok\r\n"
-                  "Content-Type: text/html; charset=\"utf-8\"\r\n"
-                  "\r\n"
-                  "<h1>Hallo!</h1>\n"
-               << QDateTime::currentDateTime().toString() << "\n";
-            socket->close();
+    qDebug() << "Data incoming";
+    qDebug() << socket->canReadLine();
 
-            if ( socket->state() == QTcpSocket::UnconnectedState )
-            {
-                delete socket;
-            }
-        }
+    QTextStream os(socket);
+    QStringList data = QString::fromLatin1(socket->readAll()).split(QRegExp(":"));
+
+    qDebug() << "Data 0: " << data[0];
+
+    if(data[0] == "connect")
+    {
+        os << "connected:" << clientId;
+    } else if(data[0] == "draw")
+    {
+        os << "card::b+";
+    }
+
+    if ( socket->state() == QTcpSocket::UnconnectedState )
+    {
+        delete socket;
     }
 }
 
