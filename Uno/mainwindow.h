@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "maincontroller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -11,15 +12,20 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, MainController *mainController = NULL);
     ~MainWindow();
+    void showServerError(QString error);
+signals:
+    void connectionFailed();
 
 private:
-    Ui::MainWindow *ui;
     void paintEvent(QPaintEvent *event);
     void onStartButtonClicked();
+    Ui::MainWindow *ui;
+    MainController *mainController;
+
 };
 #endif // MAINWINDOW_H

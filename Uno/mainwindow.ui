@@ -55,7 +55,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Start">
      <widget class="QPushButton" name="start_button">
@@ -98,6 +98,27 @@ color: white;</string>
       </property>
       <property name="pixmap">
        <pixmap resource="resource.qrc">:/assets/assets/UNO_Logo.svg</pixmap>
+      </property>
+     </widget>
+     <widget class="QLabel" name="server_error_label">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>510</y>
+        <width>331</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 18px;
+background-color: white;
+color: black;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>

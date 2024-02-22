@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-
+#include "maincontroller.h"
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
@@ -8,16 +8,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "Uno_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-            break;
-        }
-    }
-    MainWindow w;
-    w.show();
+
+    MainController *main_controller = new MainController(0);
+    //main_controller->start();
+
+    MainWindow *w = new MainWindow(nullptr, main_controller);
+    w->show();
     return a.exec();
 }
