@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
 // Override paintEvent
 void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
-    painter.drawPixmap(0, 0, width(), height(), QPixmap(":/assets/assets/background-image.png"));
+    painter.drawPixmap(0, 0, width(), height(), QPixmap(":/assets/background-image.png"));
 }
 
 void MainWindow::onStartButtonClicked() {

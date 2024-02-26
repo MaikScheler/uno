@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTcpSocket>
 #include <QHostAddress>
+#include "playingfieldmodel.h"
 
 class MainController: public QObject
 {

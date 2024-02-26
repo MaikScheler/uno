@@ -1,7 +1,5 @@
 <RCC>
-    <qresource prefix="/assets">
-        <file>assets/background-image.png</file>
-        <file>assets/b+.png</file>
+    <qresource prefix="/">
         <file>assets/b0.png</file>
         <file>assets/b1.png</file>
         <file>assets/b2.png</file>
@@ -12,10 +10,11 @@
         <file>assets/b7.png</file>
         <file>assets/b8.png</file>
         <file>assets/b9.png</file>
+        <file>assets/b+.png</file>
         <file>assets/back.png</file>
+        <file>assets/background-image.png</file>
         <file>assets/bo.png</file>
         <file>assets/bu.png</file>
-        <file>assets/g+.png</file>
         <file>assets/g0.png</file>
         <file>assets/g1.png</file>
         <file>assets/g2.png</file>
@@ -26,9 +25,9 @@
         <file>assets/g7.png</file>
         <file>assets/g8.png</file>
         <file>assets/g9.png</file>
+        <file>assets/g+.png</file>
         <file>assets/go.png</file>
         <file>assets/gu.png</file>
-        <file>assets/r+.png</file>
         <file>assets/r0.png</file>
         <file>assets/r1.png</file>
         <file>assets/r2.png</file>
@@ -39,12 +38,12 @@
         <file>assets/r7.png</file>
         <file>assets/r8.png</file>
         <file>assets/r9.png</file>
+        <file>assets/r+.png</file>
         <file>assets/ro.png</file>
         <file>assets/ru.png</file>
         <file>assets/s+.png</file>
         <file>assets/sc.png</file>
         <file>assets/UNO_Logo.svg</file>
-        <file>assets/y+.png</file>
         <file>assets/y0.png</file>
         <file>assets/y1.png</file>
         <file>assets/y2.png</file>
@@ -55,6 +54,7 @@
         <file>assets/y7.png</file>
         <file>assets/y8.png</file>
         <file>assets/y9.png</file>
+        <file>assets/y+.png</file>
         <file>assets/yo.png</file>
         <file>assets/yr.png</file>
         <file>assets/yu.png</file>

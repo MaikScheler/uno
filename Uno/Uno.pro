@@ -9,13 +9,19 @@ QT += network
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    cardmodel.cpp \
     main.cpp \
     maincontroller.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    playermodel.cpp \
+    playingfieldmodel.cpp
 
 HEADERS += \
+    cardmodel.h \
     maincontroller.h \
-    mainwindow.h
+    mainwindow.h \
+    playermodel.h \
+    playingfieldmodel.h
 
 FORMS += \
     mainwindow.ui

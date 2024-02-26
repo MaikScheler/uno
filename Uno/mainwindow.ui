@@ -55,7 +55,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Start">
      <widget class="QPushButton" name="start_button">
@@ -97,7 +97,7 @@ color: white;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resource.qrc">:/assets/assets/UNO_Logo.svg</pixmap>
+       <pixmap resource="resource.qrc">:/assets/UNO_Logo.svg</pixmap>
       </property>
      </widget>
      <widget class="QLabel" name="server_error_label">
@@ -136,7 +136,7 @@ color: black;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resource.qrc">:/assets/assets/back.png</pixmap>
+       <pixmap resource="resource.qrc">:/assets/back.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -155,7 +155,7 @@ color: black;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resource.qrc">:/assets/assets/back.png</pixmap>
+       <pixmap resource="resource.qrc">:/assets/back.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -174,7 +174,7 @@ color: black;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resource.qrc">:/assets/assets/back.png</pixmap>
+       <pixmap resource="resource.qrc">:/assets/back.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -193,7 +193,7 @@ color: black;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="resource.qrc">:/assets/assets/back.png</pixmap>
+       <pixmap resource="resource.qrc">:/assets/back.png</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
