@@ -45,7 +45,7 @@
       <x>0</x>
       <y>0</y>
       <width>1000</width>
-      <height>563</height>
+      <height>601</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -208,6 +208,16 @@ color: black;</string>
         <height>191</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton:active {
+	background-color: transparent;
+}
+
+QPushButton {
+	change-cursor: cursor('PointingHand');
+	cursor: pointer;
+}</string>
+      </property>
       <property name="text">
        <string/>
       </property>
@@ -215,11 +225,35 @@ color: black;</string>
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QScrollArea" name="primary_card_holder">
+      <property name="geometry">
+       <rect>
+        <x>-1</x>
+        <y>440</y>
+        <width>801</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>799</width>
+         <height>159</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
      <zorder>card_deck_4</zorder>
      <zorder>card_stack_button</zorder>
+     <zorder>primary_card_holder</zorder>
     </widget>
    </widget>
   </widget>

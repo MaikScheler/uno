@@ -5,6 +5,8 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 #include "playingfieldmodel.h"
+#include "cardmodel.h"
+#include "playermodel.h"
 
 class MainController: public QObject
 {
@@ -20,9 +22,13 @@ public slots:
     void startRead();
     void onError(QAbstractSocket::SocketError);
 
+signals:
+    void drawCardSignal(CardModel *card, PlayerModel* player);
+
 private:
     QTcpSocket *client;
     int clientId;
+    PlayingFieldModel *playingField;
 };
 
 #endif // MAINCONTROLLER_H

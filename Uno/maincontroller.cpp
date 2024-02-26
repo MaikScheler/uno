@@ -3,6 +3,8 @@
 MainController::MainController(QObject* parent): QObject( parent ) {
     client=new QTcpSocket;
 
+    this->playingField = new PlayingFieldModel();
+
     connect(client, SIGNAL( connected()), this, SLOT( startTransfer()));
     connect(client, SIGNAL(readyRead()), this, SLOT(startRead()));
 }
@@ -48,9 +50,12 @@ void MainController::startRead(){
     if(type == "connected")
     {
         clientId = _clientId.toInt();
+        this->playingField->addPlayer(clientId, true);
+
     } else if(type == "card")
     {
-        qDebug() << message;
+        CardModel *card = new CardModel(message);
+        emit drawCardSignal(card, this->playingField->getPlayer(clientId));
     }
 
     //Empfangenen String auswerten

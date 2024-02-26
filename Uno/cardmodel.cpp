@@ -1,6 +1,6 @@
 #include "cardmodel.h"
 
-CardModel::CardModel(QString name, QString assetUrl = "")
+CardModel::CardModel(QString name, QString assetUrl)
 {
     this->name = name;
 
@@ -9,4 +9,12 @@ CardModel::CardModel(QString name, QString assetUrl = "")
     } else {
         this->assetUrl = assetUrl;
     }
+}
+
+QString CardModel::getAssetUrl() {
+    return this->assetUrl;
+}
+
+QString CardModel::getName() {
+    return this->name;
 }

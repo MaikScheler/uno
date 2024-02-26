@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "maincontroller.h"
+#include "cardmodel.h"
+#include "playermodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,12 +23,16 @@ public:
 signals:
     void connectionFailed();
 
+public slots:
+    void drawCard(CardModel *card, PlayerModel *player);
+
 private:
     void paintEvent(QPaintEvent *event);
     void onStartButtonClicked();
     void onCardStackButtonClicked();
     Ui::MainWindow *ui;
     MainController *mainController;
+    void configureUi();
 
 };
 #endif // MAINWINDOW_H

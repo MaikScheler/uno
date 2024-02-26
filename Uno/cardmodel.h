@@ -6,7 +6,7 @@
 class CardModel
 {
 public:
-    CardModel(QString name, QString assetUrl);
+    CardModel(QString name, QString assetUrl = "");
     QString getName();
     QString getAssetUrl();
 
