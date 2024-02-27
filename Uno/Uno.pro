@@ -10,6 +10,7 @@ QT += network
 
 SOURCES += \
     cardmodel.cpp \
+    clickablelabel.cpp \
     main.cpp \
     maincontroller.cpp \
     mainwindow.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     cardmodel.h \
+    clickablelabel.h \
     maincontroller.h \
     mainwindow.h \
     playermodel.h \

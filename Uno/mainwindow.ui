@@ -126,11 +126,17 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_4">
       <property name="geometry">
        <rect>
-        <x>600</x>
-        <y>150</y>
+        <x>730</x>
+        <y>100</y>
         <width>131</width>
         <height>191</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>131</width>
+        <height>191</height>
+       </size>
       </property>
       <property name="text">
        <string/>
@@ -145,8 +151,8 @@ color: black;</string>
      <widget class="QLabel" name="card_deck">
       <property name="geometry">
        <rect>
-        <x>570</x>
-        <y>150</y>
+        <x>700</x>
+        <y>100</y>
         <width>131</width>
         <height>191</height>
        </rect>
@@ -164,8 +170,8 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_2">
       <property name="geometry">
        <rect>
-        <x>580</x>
-        <y>150</y>
+        <x>710</x>
+        <y>100</y>
         <width>131</width>
         <height>191</height>
        </rect>
@@ -183,8 +189,8 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_3">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>150</y>
+        <x>720</x>
+        <y>100</y>
         <width>131</width>
         <height>191</height>
        </rect>
@@ -202,11 +208,17 @@ color: black;</string>
      <widget class="QPushButton" name="card_stack_button">
       <property name="geometry">
        <rect>
-        <x>570</x>
-        <y>150</y>
+        <x>700</x>
+        <y>100</y>
         <width>161</width>
         <height>191</height>
        </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>161</width>
+        <height>191</height>
+       </size>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton:active {
@@ -234,18 +246,69 @@ QPushButton {
         <height>161</height>
        </rect>
       </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QScrollArea {
+	background-color: transparent;
+	border: none;
+}
+
+#scrollAreaWidgetContents {
+	background-color: transparent;
+	border: none;
+}
+</string>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
       <widget class="QWidget" name="scrollAreaWidgetContents">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>799</width>
-         <height>159</height>
+         <width>801</width>
+         <height>161</height>
         </rect>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="primary_card_holder_layout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMaximumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
       </widget>
      </widget>
      <zorder>card_deck</zorder>

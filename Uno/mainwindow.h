@@ -3,8 +3,13 @@
 
 #include <QMainWindow>
 #include "maincontroller.h"
+#include "clickablelabel.h"
 #include "cardmodel.h"
 #include "playermodel.h"
+#include <QPixmap>
+#include <QPainter>
+#include <QVBoxLayout>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,6 +30,7 @@ signals:
 
 public slots:
     void drawCard(CardModel *card, PlayerModel *player);
+    void onCardClick(QString cardName);
 
 private:
     void paintEvent(QPaintEvent *event);
@@ -33,6 +39,7 @@ private:
     Ui::MainWindow *ui;
     MainController *mainController;
     void configureUi();
+    QVBoxLayout *scrollLayout;
 
 };
 #endif // MAINWINDOW_H

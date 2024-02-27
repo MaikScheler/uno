@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QPixmap>
-#include <QPainter>
+
 
 MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     : QMainWindow(parent)
@@ -42,16 +41,29 @@ void MainWindow::onStartButtonClicked() {
 
 void MainWindow::drawCard(CardModel *card, PlayerModel *player) {
     if (player->getPrimary()) {
-        QLabel *cardLabel = new QLabel();
+        ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), card->getName());
         cardLabel->setPixmap(QPixmap::fromImage(QImage(card->getAssetUrl())));
+        cardLabel->setFixedSize(117, 171);
+        cardLabel->move(cardLabel->x(), 50);
+        cardLabel->setScaledContents(true);
+        cardLabel->setCursor(Qt::PointingHandCursor);
+        connect(cardLabel, &ClickableLabel::clicked, this, &MainWindow::onCardClick);
 
-        ui->primary_card_holder->setWidget(cardLabel);
+        int spacing = -50; // Negative spacing for overlap
+        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
+        spacer->changeSize(spacing, 0); // Adjust the size of the spacer
+
+        ui->primary_card_holder_layout->addWidget(cardLabel);
+        ui->primary_card_holder_layout->addSpacerItem(spacer);
     } else {
 
     }
-
-    qDebug() << "draw Card test funktion: " << player->getClientId() << card->getName() << "assetUrl: " << card->getAssetUrl();
 }
+
+void MainWindow::onCardClick(QString cardName) {
+    qDebug() << "test" << cardName;
+}
+
 
 void MainWindow::onCardStackButtonClicked()
 {
@@ -65,10 +77,16 @@ void MainWindow::showServerError(QString error) {
 
 void MainWindow::configureUi() {
     this->setFixedSize(1000, 563);
-    this->ui->card_stack_button->setCursor(Qt::PointingHandCursor);
-    this->ui->start_button->setCursor(Qt::PointingHandCursor);
+    ui->card_stack_button->setCursor(Qt::PointingHandCursor);
+    ui->start_button->setCursor(Qt::PointingHandCursor);
 
-    this->ui->primary_card_holder->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->primary_card_holder->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->primary_card_holder->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    ui->primary_card_holder->setFixedSize(1000, 171 + 50 + 50);
+    ui->primary_card_holder->move(0, height() - ui->primary_card_holder->height());
+    ui->scrollAreaWidgetContents->setFixedHeight(ui->primary_card_holder->height());
+
+    ui->primary_card_holder->widget()->setLayout(ui->primary_card_holder_layout);
 
     ui->main_screen->setCurrentIndex(0);
     ui->server_error_label->hide();
