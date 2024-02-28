@@ -1,14 +1,14 @@
 #include "clickablelabel.h"
 
-ClickableLabel::ClickableLabel(QWidget* parent, Qt::WindowFlags f, QString cardName)
+ClickableLabel::ClickableLabel(QWidget* parent, Qt::WindowFlags f, int cardId)
     : QLabel(parent) {
-    this->cardName = cardName;
+    this->cardId = cardId;
 }
 
 ClickableLabel::~ClickableLabel() {}
 
 void ClickableLabel::mousePressEvent(QMouseEvent* event) {
-    emit clicked(this->cardName);
+    emit clicked(this->cardId, this);
 }
 
 void ClickableLabel::enterEvent(QEvent *ev)

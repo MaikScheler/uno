@@ -40,8 +40,9 @@ void MainWindow::onStartButtonClicked() {
 }
 
 void MainWindow::drawCard(CardModel *card, PlayerModel *player) {
+    int cardId = 10;
     if (player->getPrimary()) {
-        ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), card->getName());
+        ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), cardId);
         cardLabel->setPixmap(QPixmap::fromImage(QImage(card->getAssetUrl())));
         cardLabel->setFixedSize(117, 171);
         cardLabel->move(cardLabel->x(), 50);
@@ -49,19 +50,39 @@ void MainWindow::drawCard(CardModel *card, PlayerModel *player) {
         cardLabel->setCursor(Qt::PointingHandCursor);
         connect(cardLabel, &ClickableLabel::clicked, this, &MainWindow::onCardClick);
 
-        int spacing = -50; // Negative spacing for overlap
+        int spacing = -20; // Negative spacing for overlap
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
         spacer->changeSize(spacing, 0); // Adjust the size of the spacer
 
         ui->primary_card_holder_layout->addWidget(cardLabel);
         ui->primary_card_holder_layout->addSpacerItem(spacer);
     } else {
+        enemyCardCounter++;
 
+        if (enemyCardCounter <= 7) {
+            QLabel *enemyCardLabel = new QLabel();
+            enemyCardLabel->setPixmap(QPixmap::fromImage(QImage(":/assets/back.png")));
+            enemyCardLabel->setFixedSize(117, 171);
+            enemyCardLabel->move(enemyCardLabel->x(), 50);
+            enemyCardLabel->setScaledContents(true);
+
+            int spacing = -60; // Negative spacing for overlap
+            QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Fixed, QSizePolicy::Fixed);
+            spacer->changeSize(spacing, 0); // Adjust the size of the spacer
+
+            ui->enemy_card_holder_layout->addWidget(enemyCardLabel);
+            ui->enemy_card_holder_layout->addSpacerItem(spacer);
+        }
+
+        ui->enemy_card_counter->setText("Spieler 2 hat " + QString::number(enemyCardCounter) + " Karten");
     }
 }
 
-void MainWindow::onCardClick(QString cardName) {
-    qDebug() << "test" << cardName;
+void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
+    ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(cardLabel) + 1));
+    delete cardLabel;
+
+    qDebug() << "test" << cardId;
 }
 
 
@@ -85,8 +106,22 @@ void MainWindow::configureUi() {
     ui->primary_card_holder->setFixedSize(1000, 171 + 50 + 50);
     ui->primary_card_holder->move(0, height() - ui->primary_card_holder->height());
     ui->scrollAreaWidgetContents->setFixedHeight(ui->primary_card_holder->height());
+    ui->primary_card_holder_layout->setStretch(0,1);
+    ui->primary_card_holder_layout->setAlignment(Qt::AlignLeft);
 
     ui->primary_card_holder->widget()->setLayout(ui->primary_card_holder_layout);
+
+
+    ui->enemy_card_holder->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->enemy_card_holder->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->enemy_card_holder->setFixedSize(800, 171 + 50 + 50);
+    ui->enemy_card_holder->move(0, -150);
+    ui->enemy_card_holder_layout->setStretch(0,1);
+    ui->enemy_card_holder_layout->setAlignment(Qt::AlignLeft);
+    ui->scrollAreaWidgetContents_Enemy->setFixedHeight(ui->enemy_card_holder->height());
+
+    ui->enemy_card_holder->widget()->setLayout(ui->enemy_card_holder_layout);
+
 
     ui->main_screen->setCurrentIndex(0);
     ui->server_error_label->hide();

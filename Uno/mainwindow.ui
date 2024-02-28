@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>993</width>
     <height>600</height>
    </rect>
   </property>
@@ -282,7 +282,7 @@ QPushButton {
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
          <horstretch>1</horstretch>
-         <verstretch>1</verstretch>
+         <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="autoFillBackground">
@@ -297,7 +297,7 @@ QPushButton {
           <height>51</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="primary_card_holder_layout">
+        <layout class="QHBoxLayout" name="primary_card_holder_layout" stretch="">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -311,12 +311,106 @@ QPushButton {
        </widget>
       </widget>
      </widget>
+     <widget class="QScrollArea" name="enemy_card_holder">
+      <property name="geometry">
+       <rect>
+        <x>-40</x>
+        <y>0</y>
+        <width>551</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QScrollArea {
+	background-color: transparent;
+	border: none;
+}
+
+#scrollAreaWidgetContents_Enemy {
+	background-color: transparent;
+	border: none;
+}
+</string>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents_Enemy">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>551</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>51</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="enemy_card_holder_layout" stretch="">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMaximumSize</enum>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="enemy_card_counter">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>0</y>
+        <width>441</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: #ffffff;
+font-size: 30px;
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
      <zorder>card_deck_4</zorder>
      <zorder>card_stack_button</zorder>
      <zorder>primary_card_holder</zorder>
+     <zorder>enemy_card_holder</zorder>
+     <zorder>enemy_card_counter</zorder>
     </widget>
    </widget>
   </widget>

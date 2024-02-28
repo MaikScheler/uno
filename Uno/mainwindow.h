@@ -30,7 +30,7 @@ signals:
 
 public slots:
     void drawCard(CardModel *card, PlayerModel *player);
-    void onCardClick(QString cardName);
+    void onCardClick(int cardId, ClickableLabel *cardLabel);
 
 private:
     void paintEvent(QPaintEvent *event);
@@ -40,6 +40,7 @@ private:
     MainController *mainController;
     void configureUi();
     QVBoxLayout *scrollLayout;
+    int enemyCardCounter = 0;
 
 };
 #endif // MAINWINDOW_H
