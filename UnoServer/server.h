@@ -5,7 +5,8 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
-#include "player.h"
+#include "playermodel.h"
+#include "playingfieldmodel.h"
 
 #include <vector>
 
@@ -20,12 +21,14 @@ public:
 
 public slots:
     void acceptConnection();
-    void startRead(int clientId);
+    void startRead(PlayerModel* player, PlayingFieldModel* pf);
 
 private:
     QTcpServer *server;
     QTcpSocket* client;
-    vector<tuple<Player*,int>> clients;
+    vector<PlayingFieldModel*> playingFields;
+
+    PlayingFieldModel* assignOrCreateLobby(PlayerModel *player);
 };
 
 #endif // SERVER_H

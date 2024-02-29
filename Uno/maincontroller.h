@@ -16,6 +16,7 @@ public:
     ~MainController();
     bool start( QString address, quint16 port );
     void drawCard();
+    void playCard(int cardId);
 
 public slots:
     void startTransfer();

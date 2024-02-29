@@ -41,7 +41,9 @@ void MainWindow::onStartButtonClicked() {
 
 void MainWindow::drawCard(CardModel *card, PlayerModel *player) {
     int cardId = 10;
-    if (player->getPrimary()) {
+    //if (player->getPrimary()) {
+    if(card->getName() != "back")
+    {
         ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), cardId);
         cardLabel->setPixmap(QPixmap::fromImage(QImage(card->getAssetUrl())));
         cardLabel->setFixedSize(117, 171);
@@ -82,7 +84,8 @@ void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
     ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(cardLabel) + 1));
     delete cardLabel;
 
-    qDebug() << "test" << cardId;
+    qDebug() << "Card clicked" << cardId;
+    //mainController->playCard(cardId);
 }
 
 

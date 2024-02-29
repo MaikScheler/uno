@@ -8,9 +8,12 @@ CONFIG += c++17 cmdline
 QT += network
 
 SOURCES += \
+        cardmodel.cpp \
         main.cpp \
-        player.cpp \
-        server.cpp
+        playermodel.cpp \
+        playingfieldmodel.cpp \
+        server.cpp \
+        stackmodel.cpp
 
 TRANSLATIONS += \
     UnoServer_de_DE.ts
@@ -23,5 +26,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    player.h \
-    server.h
+    cardmodel.h \
+    playermodel.h \
+    playingfieldmodel.h \
+    server.h \
+    stackmodel.h

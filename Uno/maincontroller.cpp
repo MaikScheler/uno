@@ -56,6 +56,9 @@ void MainController::startRead(){
     {
         CardModel *card = new CardModel(message);
         emit drawCardSignal(card, this->playingField->getPlayer(clientId));
+    } else if(type == "play")
+    {
+        qDebug() << "Card played!";
     }
 
     //Empfangenen String auswerten
@@ -66,6 +69,17 @@ void MainController::drawCard()
 {
     QString _clientId = QString::number(clientId);
     QString str("draw:" + _clientId);
+    QByteArray ba = str.toLocal8Bit();
+    const char *c_str = ba.data();
+
+    client->write( c_str, str.length()+1 );
+}
+
+void MainController::playCard(int cardId)
+{
+    QString _cardId = QString::number(cardId);
+    QString str("play:" + _cardId);
+
     QByteArray ba = str.toLocal8Bit();
     const char *c_str = ba.data();
 
