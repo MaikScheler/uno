@@ -37,29 +37,43 @@ void MainController::startRead(){
     char buffer[1024] = {0};
     QTcpSocket *sender = (QTcpSocket* ) QObject::sender();
     sender->read(buffer, sender->bytesAvailable());
+    QStringList responses = QString::fromLatin1(buffer).split(QRegExp("\n"));
 
-    QStringList response = QString::fromLatin1(buffer).split(QRegExp(":"));
-    QString type = response[0];
-    QString _clientId = response[1];
-    QString message = response.count() > 2 ? response[2] : "";
-
-    //Empfangenen String zum Debuggen ausgeben
-    qDebug() << "Type: " << type;
-    qDebug() << "Message: " << message;
-
-    if(type == "connected")
+    for(QString _response : responses)
     {
-        clientId = _clientId.toInt();
-        this->playingField->addPlayer(clientId, true);
+        QStringList response = _response.split(QRegExp(":"));
 
-    } else if(type == "card")
-    {
-        CardModel *card = new CardModel(message);
-        emit drawCardSignal(card, this->playingField->getPlayer(clientId));
-    } else if(type == "play")
-    {
-        qDebug() << "Card played!";
+        if(_response.size() == 0 || response.size() < 2)
+        {
+            continue;
+        }
+
+        QString type = response[0];
+        QString _clientId = response[1];
+        QString message = response.count() > 2 ? response[2] : "";
+
+        //Empfangenen String zum Debuggen ausgeben
+        qDebug() << response;
+        qDebug() << "Type: " << type;
+        qDebug() << "Message: " << message;
+
+        if(type == "connected")
+        {
+            clientId = _clientId.toInt();
+            this->playingField->addPlayer(clientId, true);
+
+        } else if(type == "card")
+        {
+            CardModel *card = new CardModel(message);
+            emit drawCardSignal(card, this->playingField->getPlayer(clientId));
+        } else if(type == "play")
+        {
+            qDebug() << "Card played (controller)!";
+            emit playCardSignal(message);
+        }
     }
+
+
 
     //Empfangenen String auswerten
     //ToDo

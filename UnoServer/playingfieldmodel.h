@@ -18,6 +18,8 @@ public:
 
     void drawCard(PlayerModel* player);
 
+    void start();
+
 signals:
 
 private:

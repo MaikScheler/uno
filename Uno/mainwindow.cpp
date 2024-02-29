@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     this->configureUi();
 
     connect(mainController, &MainController::drawCardSignal, this, &MainWindow::drawCard);
+    connect(mainController, &MainController::playCardSignal, this, &MainWindow::playCard);
 
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
@@ -80,12 +81,19 @@ void MainWindow::drawCard(CardModel *card, PlayerModel *player) {
     }
 }
 
+void MainWindow::playCard(QString cardName)
+{
+    ui->played_card->setFixedSize(117, 171);
+    ui->played_card->setPixmap(QPixmap::fromImage(QImage(":/assets/" + cardName + ".png")));
+    ui->played_card->setScaledContents(true);
+}
+
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
     ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(cardLabel) + 1));
     delete cardLabel;
 
     qDebug() << "Card clicked" << cardId;
-    //mainController->playCard(cardId);
+    mainController->playCard(cardId);
 }
 
 

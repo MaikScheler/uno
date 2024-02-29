@@ -31,9 +31,7 @@ bool PlayingFieldModel::hasSpace()
 
 void PlayingFieldModel::drawCard(PlayerModel *player)
 {
-
-    //player->addCard();
-    stack->getCard();
+    CardModel* card = stack->getCard();
 
     for(PlayerModel* p : players)
     {
@@ -42,9 +40,25 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
 
         if(player == p)
         {
-            os << "card::r+";
+            os << "card::" + card->getName();
         } else {
             os << "card::back";
+        }
+    }
+}
+
+void PlayingFieldModel::start()
+{
+    if(players.size() == 2)
+    {
+        CardModel* card = stack->getCard();
+        for(PlayerModel* p : players)
+        {
+            QTcpSocket* pSocket = p->getSocket();
+
+            QTextStream os(pSocket);
+            os << "play::" + card->getName() + "\n";
+            pSocket->flush();
         }
     }
 }

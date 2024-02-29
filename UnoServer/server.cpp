@@ -46,12 +46,20 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     QStringList data = QString::fromLatin1(socket->readAll()).split(QRegExp(":"));
     QString event = data[0];
 
-    qDebug() << "Data 0: " << data[0];
+    qDebug() << data;
+    qDebug() << "Event: " << event;
     qDebug() << "Requesting player id: " << player->getId();
 
     if(event == "connect")
     {
         os << "connected:" << player->getId();
+
+        socket->flush();
+
+        if(pf->hasSpace() == false)
+        {
+            pf->start();
+        }
     } else if(event == "draw")
     {
         pf->drawCard(player);
@@ -59,7 +67,6 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     } else if(event == "play")
     {
         qDebug() << "Card played";
-        os << "card::r+";
     }
 
     if ( socket->state() == QTcpSocket::UnconnectedState )
@@ -76,6 +83,7 @@ PlayingFieldModel* Server::assignOrCreateLobby(PlayerModel *player)
         if(pf->hasSpace())
         {
             pf->addPlayer(player);
+
             return pf;
         }
     }

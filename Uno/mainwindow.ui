@@ -297,7 +297,7 @@ QPushButton {
           <height>51</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="primary_card_holder_layout" stretch="">
+        <layout class="QHBoxLayout" name="primary_card_holder_layout">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -371,7 +371,7 @@ QPushButton {
           <height>51</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="enemy_card_holder_layout" stretch="">
+        <layout class="QHBoxLayout" name="enemy_card_holder_layout">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -403,6 +403,25 @@ font-size: 30px;
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="played_card">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>100</y>
+        <width>131</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>117</width>
+        <height>171</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
@@ -411,6 +430,7 @@ font-size: 30px;
      <zorder>primary_card_holder</zorder>
      <zorder>enemy_card_holder</zorder>
      <zorder>enemy_card_counter</zorder>
+     <zorder>played_card</zorder>
     </widget>
    </widget>
   </widget>

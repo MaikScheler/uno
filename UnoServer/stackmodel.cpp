@@ -4,10 +4,8 @@ StackModel::StackModel()
 {
     char colors[4] = { 'r', 'g', 'b', 'y' };
 
-    int x = 0;
-    while(colors[x] != '\0')
+    for(char c : colors)
     {
-        char c = colors[x];
         QString cardName = c + QString("0");
         CardModel *card = new CardModel(cardName);
         cards.push_back(card);
@@ -22,9 +20,13 @@ StackModel::StackModel()
             }
         }
     }
+
+    random_shuffle(begin(cards), end(cards));
 }
 
 CardModel* StackModel::getCard()
 {
-    return cards.at(0);
+    CardModel* card = cards.at(0);
+    cards.erase(cards.begin());
+    return card;
 }

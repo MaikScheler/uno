@@ -30,6 +30,7 @@ signals:
 
 public slots:
     void drawCard(CardModel *card, PlayerModel *player);
+    void playCard(QString cardName);
     void onCardClick(int cardId, ClickableLabel *cardLabel);
 
 private:
