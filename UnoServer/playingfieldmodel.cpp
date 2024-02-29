@@ -47,6 +47,20 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
     }
 }
 
+void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
+{
+    for(PlayerModel* p : players)
+    {
+        QTcpSocket* pSocket = p->getSocket();
+
+        p->removeCard(cardId);
+
+        QTextStream os(pSocket);
+        os << "play::" + card->getName() + "\n";
+        pSocket->flush();
+    }
+}
+
 void PlayingFieldModel::start()
 {
     if(players.size() == 2)
@@ -59,6 +73,15 @@ void PlayingFieldModel::start()
             QTextStream os(pSocket);
             os << "play::" + card->getName() + "\n";
             pSocket->flush();
+
+            for(int i = 1; i <= 7; i++)
+            {
+                CardModel* playerCard = stack->getCard();
+                os << "card::" + playerCard->getName() + ":" + QString::number(playerCard->getId()) + "\n";
+                p->addCard(playerCard);
+                os << "card::back:0000\n";
+                pSocket->flush();
+            }
         }
     }
 }

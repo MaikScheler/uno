@@ -24,7 +24,7 @@ public slots:
     void onError(QAbstractSocket::SocketError);
 
 signals:
-    void drawCardSignal(CardModel *card, PlayerModel* player);
+    void drawCardSignal(QString cardId, QString cardName);
     void playCardSignal(QString cardName);
 
 private:

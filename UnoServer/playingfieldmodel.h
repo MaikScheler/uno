@@ -20,6 +20,8 @@ public:
 
     void start();
 
+    void playCard(QString cardName, PlayerModel* player);
+
 signals:
 
 private:

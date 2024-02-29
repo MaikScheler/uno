@@ -15,13 +15,16 @@ public:
     PlayerModel(QTcpSocket *socket);
 
     int getId();
+    QString getName();
     QTcpSocket *getSocket();
     void addCard(CardModel* card);
+    void removeCard(QString cardName);
 
 private:
     int id;
     QTcpSocket *socket;
     vector<CardModel*> cards;
+    QString name;
 };
 
 #endif // PLAYERMODEL_H

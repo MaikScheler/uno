@@ -64,8 +64,10 @@ void MainController::startRead(){
 
         } else if(type == "card")
         {
+
             CardModel *card = new CardModel(message);
-            emit drawCardSignal(card, this->playingField->getPlayer(clientId));
+
+            emit drawCardSignal(response[3], message);
         } else if(type == "play")
         {
             qDebug() << "Card played (controller)!";

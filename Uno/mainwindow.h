@@ -29,7 +29,7 @@ signals:
     void connectionFailed();
 
 public slots:
-    void drawCard(CardModel *card, PlayerModel *player);
+    void drawCard(QString cardId, QString cardName);
     void playCard(QString cardName);
     void onCardClick(int cardId, ClickableLabel *cardLabel);
 

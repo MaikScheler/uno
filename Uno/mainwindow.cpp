@@ -40,13 +40,12 @@ void MainWindow::onStartButtonClicked() {
     ui->start_button->setDisabled(false);
 }
 
-void MainWindow::drawCard(CardModel *card, PlayerModel *player) {
-    int cardId = 10;
+void MainWindow::drawCard(QString cardId, QString cardName) {
     //if (player->getPrimary()) {
-    if(card->getName() != "back")
+    if(cardName != "back")
     {
-        ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), cardId);
-        cardLabel->setPixmap(QPixmap::fromImage(QImage(card->getAssetUrl())));
+        ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), cardId.toInt());
+        cardLabel->setPixmap(QPixmap::fromImage(QImage(":/assets/" + cardName + ".png")));
         cardLabel->setFixedSize(117, 171);
         cardLabel->move(cardLabel->x(), 50);
         cardLabel->setScaledContents(true);
