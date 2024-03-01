@@ -57,6 +57,16 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
         return;
     }
 
+    QChar prevCardColor = card->getName().at(0);
+    QChar prevCardNumber = card->getName().at(1);
+
+    QChar newCardColor = playedCard->getName().at(0);
+    QChar newCardNumber = playedCard->getName().at(1);
+
+    if(prevCardColor != newCardColor && prevCardNumber != newCardNumber) return;
+
+    this->card = playedCard;
+
     for(PlayerModel* p : players)
     {
         QTcpSocket* pSocket = p->getSocket();
@@ -74,6 +84,7 @@ void PlayingFieldModel::start()
     if(players.size() == 2)
     {
         CardModel* card = stack->getCard();
+        this->card = card;
         for(PlayerModel* p : players)
         {
             QTcpSocket* pSocket = p->getSocket();

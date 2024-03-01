@@ -73,11 +73,12 @@ void MainController::startRead(){
             if(_clientId.toInt() != clientId)
             {
                 qDebug() << "Removing card of enemy.";
-                emit removeEnemyCard();
-                emit playCardSignal(response[3], message);
+                emit removeEnemyCardSignal();
             } else {
-                emit playCardSignal(response[3], message);
+                emit removePlayedCardSignal(response[3]);
             }
+
+            emit playCardSignal(response[3], message);
         }
     }
 }

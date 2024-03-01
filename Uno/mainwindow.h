@@ -33,6 +33,7 @@ public slots:
     void playCard(QString cardId, QString cardName);
     void onCardClick(int cardId, ClickableLabel *cardLabel);
     void removeEnemyCard();
+    void removePlayedCard(QString cardId);
 
 private:
     void paintEvent(QPaintEvent *event);

@@ -13,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
 
     connect(mainController, &MainController::drawCardSignal, this, &MainWindow::drawCard);
     connect(mainController, &MainController::playCardSignal, this, &MainWindow::playCard);
-    connect(mainController, &MainController::removeEnemyCard, this, &MainWindow::removeEnemyCard);
+    connect(mainController, &MainController::removeEnemyCardSignal, this, &MainWindow::removeEnemyCard);
+    connect(mainController, &MainController::removePlayedCardSignal, this, &MainWindow::removePlayedCard);
 
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
@@ -46,6 +47,7 @@ void MainWindow::drawCard(QString cardId, QString cardName) {
     if(cardName != "back")
     {
         ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), cardId.toInt());
+        cardLabel->setObjectName(cardId);
         cardLabel->setPixmap(QPixmap::fromImage(QImage(":/assets/" + cardName + ".png")));
         cardLabel->setFixedSize(117, 171);
         cardLabel->move(cardLabel->x(), 50);
@@ -83,14 +85,36 @@ void MainWindow::drawCard(QString cardId, QString cardName) {
 
 void MainWindow::removeEnemyCard()
 {
-    enemyCardCounter--;
 
     if(enemyCardCounter <= 7)
     {
-        ui->enemy_card_holder_layout->removeItem(ui->enemy_card_holder_layout->itemAt(0));
+        ui->enemy_card_holder_layout->removeItem(ui->enemy_card_holder_layout->itemAt(1));
+        delete ui->enemy_card_holder_layout->itemAt(0)->widget();
     }
 
+    enemyCardCounter--;
+
     ui->enemy_card_counter->setText("Spieler 2 hat " + QString::number(enemyCardCounter) + " Karten");
+}
+
+void MainWindow::removePlayedCard(QString cardId)
+{
+    for (int i = 0; i < ui->primary_card_holder_layout->count(); ++i)
+    {
+        ClickableLabel *widget = (ClickableLabel*)ui->primary_card_holder_layout->itemAt(i)->widget();
+        if (widget != NULL && widget->objectName() == cardId)
+        {
+            qDebug() << widget->objectName();
+            ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(widget) + 1));
+            delete widget;
+        }
+        else
+        {
+            // You may want to recurse, or perform different actions on layouts.
+            // See gridLayout->itemAt(i)->layout()
+        }
+    }
+
 }
 
 void MainWindow::playCard(QString cardId, QString cardName)
@@ -101,8 +125,8 @@ void MainWindow::playCard(QString cardId, QString cardName)
 }
 
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
-    ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(cardLabel) + 1));
-    delete cardLabel;
+    //ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(cardLabel) + 1));
+    //delete cardLabel;
 
     qDebug() << "Card clicked" << cardId;
     mainController->playCard(cardId);
