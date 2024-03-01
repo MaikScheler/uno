@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "cardmodel.h"
 
 using namespace std;
@@ -7,11 +5,7 @@ using namespace std;
 CardModel::CardModel(QString name)
 {
     this->name = name;
-
-    srand(time(NULL));
     this->id = rand();
-
-    cout << this->id;
 }
 
 QString CardModel::getName()
@@ -19,7 +13,7 @@ QString CardModel::getName()
     return name;
 }
 
-int CardModel::getId()
+int CardModel::getId() const
 {
     return id;
 }

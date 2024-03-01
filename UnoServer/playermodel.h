@@ -19,6 +19,7 @@ public:
     QTcpSocket *getSocket();
     void addCard(CardModel* card);
     void removeCard(QString cardName);
+    CardModel* getCard(QString cardId);
 
 private:
     int id;

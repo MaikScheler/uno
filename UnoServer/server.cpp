@@ -66,7 +66,7 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
         //os << "card::b+";
     } else if(event == "play")
     {
-        qDebug() << "Card played";
+        qDebug() << "Card played" << data[1];
         pf->playCard(data[1], player);
     }
 

@@ -38,6 +38,7 @@ void MainController::startRead(){
     QTcpSocket *sender = (QTcpSocket* ) QObject::sender();
     sender->read(buffer, sender->bytesAvailable());
     QStringList responses = QString::fromLatin1(buffer).split(QRegExp("\n"));
+    reverse(responses.begin(), responses.end());
 
     for(QString _response : responses)
     {
@@ -64,21 +65,21 @@ void MainController::startRead(){
 
         } else if(type == "card")
         {
-
-            CardModel *card = new CardModel(message);
-
+            // Card id on index 3 and card name on index 2 (message)
             emit drawCardSignal(response[3], message);
         } else if(type == "play")
         {
-            qDebug() << "Card played (controller)!";
-            emit playCardSignal(message);
+            // Card id on index 3 and card name on index 2 (message)
+            if(_clientId.toInt() != clientId)
+            {
+                qDebug() << "Removing card of enemy.";
+                emit removeEnemyCard();
+                emit playCardSignal(response[3], message);
+            } else {
+                emit playCardSignal(response[3], message);
+            }
         }
     }
-
-
-
-    //Empfangenen String auswerten
-    //ToDo
 }
 
 void MainController::drawCard()

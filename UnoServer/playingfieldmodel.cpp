@@ -32,6 +32,7 @@ bool PlayingFieldModel::hasSpace()
 void PlayingFieldModel::drawCard(PlayerModel *player)
 {
     CardModel* card = stack->getCard();
+    player->addCard(card);
 
     for(PlayerModel* p : players)
     {
@@ -40,25 +41,32 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
 
         if(player == p)
         {
-            os << "card::" + card->getName();
+            os << "card::" + card->getName() + ":" + QString::number(card->getId());
         } else {
-            os << "card::back";
+            os << "card::back:0000";
         }
     }
 }
 
 void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 {
+    CardModel *playedCard = player->getCard(cardId);
+
+    if(playedCard == NULL)
+    {
+        return;
+    }
+
     for(PlayerModel* p : players)
     {
         QTcpSocket* pSocket = p->getSocket();
 
-        p->removeCard(cardId);
-
         QTextStream os(pSocket);
-        os << "play::" + card->getName() + "\n";
+        os << "play:" + QString::number(player->getId()) + ":" + playedCard->getName() + ":" + cardId + "\n";
         pSocket->flush();
     }
+
+    player->removeCard(cardId);
 }
 
 void PlayingFieldModel::start()
@@ -71,14 +79,14 @@ void PlayingFieldModel::start()
             QTcpSocket* pSocket = p->getSocket();
 
             QTextStream os(pSocket);
-            os << "play::" + card->getName() + "\n";
+            os << "play:" + QString::number(p->getId()) + ":" + card->getName() + ":" + QString::number(card->getId()) + "\n";
             pSocket->flush();
 
             for(int i = 1; i <= 7; i++)
             {
                 CardModel* playerCard = stack->getCard();
-                os << "card::" + playerCard->getName() + ":" + QString::number(playerCard->getId()) + "\n";
                 p->addCard(playerCard);
+                os << "card::" + playerCard->getName() + ":" + QString::number(playerCard->getId()) + "\n";
                 os << "card::back:0000\n";
                 pSocket->flush();
             }

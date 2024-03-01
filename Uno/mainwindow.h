@@ -30,8 +30,9 @@ signals:
 
 public slots:
     void drawCard(QString cardId, QString cardName);
-    void playCard(QString cardName);
+    void playCard(QString cardId, QString cardName);
     void onCardClick(int cardId, ClickableLabel *cardLabel);
+    void removeEnemyCard();
 
 private:
     void paintEvent(QPaintEvent *event);

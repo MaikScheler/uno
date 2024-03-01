@@ -9,7 +9,7 @@ class CardModel
 public:
     CardModel(QString name);
     QString getName();
-    int getId();
+    int getId() const;
 
 private:
     QString name;

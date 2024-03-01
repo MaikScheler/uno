@@ -26,9 +26,21 @@ void PlayerModel::addCard(CardModel *card)
     cards.push_back(card);
 }
 
+CardModel* PlayerModel::getCard(QString cardId)
+{
+    auto isValueMatch = [&cardId](const CardModel* c) {
+        return c->getId() == cardId.toInt();
+    };
+
+    auto it = find_if(cards.begin(), cards.end(), isValueMatch);
+    auto index = std::distance(this->cards.begin(), it);
+
+    return cards.at(index);
+}
+
 void PlayerModel::removeCard(QString cardId)
 {
-    auto it = find_if(this->cards.begin(), this->cards.end(), [&cardId](CardModel *card) {return card->getId() == cardId;});
+    auto it = find_if(this->cards.begin(), this->cards.end(), [&cardId](CardModel *card) {return card->getId() == cardId.toInt();});
 
     if (it != this->cards.end())
     {

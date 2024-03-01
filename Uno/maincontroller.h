@@ -25,7 +25,8 @@ public slots:
 
 signals:
     void drawCardSignal(QString cardId, QString cardName);
-    void playCardSignal(QString cardName);
+    void playCardSignal(QString cardId, QString cardName);
+    void removeEnemyCard();
 
 private:
     QTcpSocket *client;
