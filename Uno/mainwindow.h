@@ -39,6 +39,7 @@ private:
     void paintEvent(QPaintEvent *event);
     void onStartButtonClicked();
     void onCardStackButtonClicked();
+    void skipTurn();
     Ui::MainWindow *ui;
     MainController *mainController;
     void configureUi();

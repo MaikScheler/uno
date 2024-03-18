@@ -31,6 +31,10 @@ bool PlayingFieldModel::hasSpace()
 
 void PlayingFieldModel::drawCard(PlayerModel *player)
 {
+    if (this->currentPlayer != player || this->drawCardLimit == this->drawenCards) {
+        return;
+    }
+
     CardModel* card = stack->getCard();
     player->addCard(card);
 
@@ -46,10 +50,16 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
             os << "card::back:0000";
         }
     }
+
+    this->drawenCards++;
 }
 
 void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 {
+    if (this->currentPlayer != player) {
+        return;
+    }
+
     CardModel *playedCard = player->getCard(cardId);
 
     if(playedCard == NULL)
@@ -77,12 +87,22 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
     }
 
     player->removeCard(cardId);
+
+    for(PlayerModel* p : players)
+    {
+        if (p != player) {
+            this->currentPlayer = p;
+        }
+    }
+
 }
 
 void PlayingFieldModel::start()
 {
     if(players.size() == 2)
     {
+        this->currentPlayer = players.at(1);
+
         CardModel* card = stack->getCard();
         this->card = card;
         for(PlayerModel* p : players)
@@ -101,6 +121,15 @@ void PlayingFieldModel::start()
                 os << "card::back:0000\n";
                 pSocket->flush();
             }
+        }
+    }
+}
+
+void PlayingFieldModel::skip(PlayerModel* player) {
+    for(PlayerModel* p : players)
+    {
+        if (p != player) {
+            this->currentPlayer = p;
         }
     }
 }

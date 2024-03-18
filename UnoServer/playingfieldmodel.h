@@ -22,12 +22,17 @@ public:
 
     void playCard(QString cardName, PlayerModel* player);
 
+    void skip(PlayerModel* player);
+
 signals:
 
 private:
     vector<PlayerModel*> players;
+    PlayerModel* currentPlayer;
     CardModel* card;
     StackModel* stack;
+    int drawenCards = 0;
+    int drawCardLimit = 1;
 
     void notifyPlayers();
 };

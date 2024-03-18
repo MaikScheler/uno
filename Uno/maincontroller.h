@@ -17,6 +17,7 @@ public:
     bool start( QString address, quint16 port );
     void drawCard();
     void playCard(int cardId);
+    void skipTurn();
 
 public slots:
     void startTransfer();
@@ -33,6 +34,7 @@ private:
     QTcpSocket *client;
     int clientId;
     PlayingFieldModel *playingField;
+    void sendMessage(QString& type, vector<QString>& params);
 };
 
 #endif // MAINCONTROLLER_H

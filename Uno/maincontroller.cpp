@@ -90,7 +90,7 @@ void MainController::drawCard()
     QByteArray ba = str.toLocal8Bit();
     const char *c_str = ba.data();
 
-    client->write( c_str, str.length()+1 );
+    client->write( c_str, str.length() + 1);
 }
 
 void MainController::playCard(int cardId)
@@ -104,7 +104,27 @@ void MainController::playCard(int cardId)
     client->write( c_str, str.length()+1 );
 }
 
+void MainController::skipTurn() {
+    QString type = QString("skip");
+    vector<QString> params = {QString::number(clientId)};
+    sendMessage(type, params);
+}
+
 void MainController::onError(QAbstractSocket::SocketError) {
     QTcpSocket* socket = (QTcpSocket*)sender();
     qDebug() << "Socket Error: " << socket->errorString();
+}
+
+
+void MainController::sendMessage(QString& type, vector<QString>& params) {
+  QString data = type;
+  for (const QString& param : params) {
+    data += ":";
+    data += param;
+  }
+
+  QByteArray ba = data.toLocal8Bit();
+  const char *c_str = ba.data();
+
+  client->write( c_str, data.length()+1 );
 }

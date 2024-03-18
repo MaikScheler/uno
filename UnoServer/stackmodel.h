@@ -1,6 +1,8 @@
 #ifndef STACKMODEL_H
 #define STACKMODEL_H
 
+#include <vector>
+
 using namespace std;
 
 #include "cardmodel.h"

@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
 
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
+    connect(ui->skip_button, &QPushButton::clicked, this, &MainWindow::skipTurn);
 }
 
 // Override paintEvent
@@ -61,6 +62,8 @@ void MainWindow::drawCard(QString cardId, QString cardName) {
 
         ui->primary_card_holder_layout->addWidget(cardLabel);
         ui->primary_card_holder_layout->addSpacerItem(spacer);
+
+        ui->skip_button->setVisible(true);
     } else {
         enemyCardCounter++;
 
@@ -122,6 +125,8 @@ void MainWindow::playCard(QString cardId, QString cardName)
     ui->played_card->setFixedSize(117, 171);
     ui->played_card->setPixmap(QPixmap::fromImage(QImage(":/assets/" + cardName + ".png")));
     ui->played_card->setScaledContents(true);
+
+    ui->skip_button->setVisible(false);
 }
 
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
@@ -130,6 +135,10 @@ void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
 
     qDebug() << "Card clicked" << cardId;
     mainController->playCard(cardId);
+}
+
+void MainWindow::skipTurn() {
+    this->mainController->skipTurn();
 }
 
 
@@ -169,6 +178,7 @@ void MainWindow::configureUi() {
 
     ui->enemy_card_holder->widget()->setLayout(ui->enemy_card_holder_layout);
 
+    ui->skip_button->setVisible(false);
 
     ui->main_screen->setCurrentIndex(0);
     ui->server_error_label->hide();

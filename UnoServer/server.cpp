@@ -63,11 +63,11 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     } else if(event == "draw")
     {
         pf->drawCard(player);
-        //os << "card::b+";
     } else if(event == "play")
     {
-        qDebug() << "Card played" << data[1];
         pf->playCard(data[1], player);
+    } else if (event == "skip") {
+
     }
 
     if ( socket->state() == QTcpSocket::UnconnectedState )

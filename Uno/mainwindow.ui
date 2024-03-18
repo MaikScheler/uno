@@ -422,6 +422,19 @@ font-size: 30px;
        <string/>
       </property>
      </widget>
+     <widget class="QPushButton" name="skip_button">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>200</y>
+        <width>121</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zug beenden</string>
+      </property>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
@@ -431,6 +444,7 @@ font-size: 30px;
      <zorder>enemy_card_holder</zorder>
      <zorder>enemy_card_counter</zorder>
      <zorder>played_card</zorder>
+     <zorder>skip_button</zorder>
     </widget>
    </widget>
   </widget>
