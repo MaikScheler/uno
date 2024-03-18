@@ -40,6 +40,8 @@ private:
     void onStartButtonClicked();
     void onCardStackButtonClicked();
     void skipTurn();
+    void changeTurn(bool isTurn);
+    void wonScreen(bool won);
     Ui::MainWindow *ui;
     MainController *mainController;
     void configureUi();

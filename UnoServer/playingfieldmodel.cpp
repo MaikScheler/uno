@@ -56,6 +56,7 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
 
 void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 {
+    this->drawenCards = 0;
     if (this->currentPlayer != player) {
         return;
     }
@@ -88,13 +89,7 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 
     player->removeCard(cardId);
 
-    for(PlayerModel* p : players)
-    {
-        if (p != player) {
-            this->currentPlayer = p;
-        }
-    }
-
+    this->switchPlayer(player);
 }
 
 void PlayingFieldModel::start()
@@ -123,15 +118,50 @@ void PlayingFieldModel::start()
             }
         }
     }
+
+    this->notifyTurn();
 }
 
 void PlayingFieldModel::skip(PlayerModel* player) {
+    this->drawenCards = 0;
+    this->switchPlayer(player);
+}
+
+void PlayingFieldModel::checkWin(PlayerModel *player) {
+    if (player->getCardCount() != 0) {
+        return;
+    }
+
+
     for(PlayerModel* p : players)
     {
-        if (p != player) {
-            this->currentPlayer = p;
-        }
+        QTcpSocket* pSocket = p->getSocket();
+
+        QTextStream os(pSocket);
+        os << "won:" + QString::number(player->getId()) +  "\n";
+        pSocket->flush();
     }
 }
 
+void PlayingFieldModel::switchPlayer(PlayerModel* currentPlayer) {
+    for(PlayerModel* p : players)
+    {
+        if (p != currentPlayer) {
+            this->currentPlayer = p;
+        }
+    }
+
+    this->notifyTurn();
+}
+
+void PlayingFieldModel::notifyTurn() {
+    for(PlayerModel* p : players)
+    {
+        QTcpSocket* pSocket = p->getSocket();
+
+        QTextStream os(pSocket);
+        os << "turn:" + QString::number(currentPlayer->getId()) +  "\n";
+        pSocket->flush();
+    }
+}
 

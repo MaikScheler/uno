@@ -24,6 +24,8 @@ public:
 
     void skip(PlayerModel* player);
 
+    void switchPlayer(PlayerModel* currentPlayer);
+
 signals:
 
 private:
@@ -35,6 +37,9 @@ private:
     int drawCardLimit = 1;
 
     void notifyPlayers();
+
+    void notifyTurn();
+    void checkWin(PlayerModel *player);
 };
 
 #endif // PLAYINGFIELDMODEL_H

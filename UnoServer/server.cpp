@@ -67,7 +67,7 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     {
         pf->playCard(data[1], player);
     } else if (event == "skip") {
-
+        pf->skip(player);
     }
 
     if ( socket->state() == QTcpSocket::UnconnectedState )

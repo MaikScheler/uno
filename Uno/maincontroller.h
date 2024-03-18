@@ -29,6 +29,8 @@ signals:
     void playCardSignal(QString cardId, QString cardName);
     void removeEnemyCardSignal();
     void removePlayedCardSignal(QString cardId);
+    void changeTurn(bool isTurn);
+    void displayWonScreen(bool won);
 
 private:
     QTcpSocket *client;

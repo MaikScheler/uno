@@ -79,29 +79,30 @@ void MainController::startRead(){
             }
 
             emit playCardSignal(response[3], message);
+        } else if (type == "turn") {
+            int sendClientId = _clientId.toInt();
+            bool turn = sendClientId == clientId;
+            emit changeTurn(turn);
+        } else if (type == "won") {
+            int sendClientId = _clientId.toInt();
+            bool won = sendClientId == clientId;
+            emit displayWonScreen(won);
         }
     }
 }
 
 void MainController::drawCard()
 {
-    QString _clientId = QString::number(clientId);
-    QString str("draw:" + _clientId);
-    QByteArray ba = str.toLocal8Bit();
-    const char *c_str = ba.data();
-
-    client->write( c_str, str.length() + 1);
+    QString type = QString("draw");
+    vector<QString> params = {QString::number(clientId)};
+    sendMessage(type, params);
 }
 
 void MainController::playCard(int cardId)
 {
-    QString _cardId = QString::number(cardId);
-    QString str("play:" + _cardId);
-
-    QByteArray ba = str.toLocal8Bit();
-    const char *c_str = ba.data();
-
-    client->write( c_str, str.length()+1 );
+    QString type = QString("play");
+    vector<QString> params = {QString::number(cardId)};
+    sendMessage(type, params);
 }
 
 void MainController::skipTurn() {

@@ -51,3 +51,7 @@ void PlayerModel::removeCard(QString cardId)
         cards.erase(this->cards.begin() + index);
     }
 }
+
+int PlayerModel::getCardCount() {
+    return this->cards.size();
+}

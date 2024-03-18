@@ -20,6 +20,7 @@ public:
     void addCard(CardModel* card);
     void removeCard(QString cardName);
     CardModel* getCard(QString cardId);
+    int getCardCount();
 
 private:
     int id;

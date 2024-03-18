@@ -55,7 +55,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="Start">
      <widget class="QPushButton" name="start_button">
@@ -425,7 +425,7 @@ font-size: 30px;
      <widget class="QPushButton" name="skip_button">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>330</x>
         <y>200</y>
         <width>121</width>
         <height>51</height>
@@ -433,6 +433,23 @@ font-size: 30px;
       </property>
       <property name="text">
        <string>Zug beenden</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="turn_label">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>200</y>
+        <width>281</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 24px;
+color: white;</string>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
      <zorder>card_deck</zorder>
@@ -445,6 +462,45 @@ font-size: 30px;
      <zorder>enemy_card_counter</zorder>
      <zorder>played_card</zorder>
      <zorder>skip_button</zorder>
+     <zorder>turn_label</zorder>
+    </widget>
+    <widget class="QWidget" name="won">
+     <widget class="QLabel" name="won_label">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>130</y>
+        <width>591</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 50px;
+color: white;</string>
+      </property>
+      <property name="text">
+       <string>Du hast gewonnen</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="lost">
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>150</y>
+        <width>441</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 50px;
+color: white;</string>
+      </property>
+      <property name="text">
+       <string>Du hast verloren</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

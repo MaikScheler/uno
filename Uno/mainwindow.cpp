@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     connect(mainController, &MainController::playCardSignal, this, &MainWindow::playCard);
     connect(mainController, &MainController::removeEnemyCardSignal, this, &MainWindow::removeEnemyCard);
     connect(mainController, &MainController::removePlayedCardSignal, this, &MainWindow::removePlayedCard);
+    connect(mainController, &MainController::changeTurn, this, &MainWindow::changeTurn);
+    connect(mainController, &MainController::displayWonScreen, this, &MainWindow::wonScreen);
 
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
@@ -139,6 +141,24 @@ void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
 
 void MainWindow::skipTurn() {
     this->mainController->skipTurn();
+
+    ui->skip_button->setVisible(false);
+}
+
+void MainWindow::changeTurn(bool isTurn) {
+    if (isTurn) {
+        ui->turn_label->setText("Du bist am Zug");
+    } else {
+        ui->turn_label->setText("Der Gegner ist am Zug");
+    }
+}
+
+void MainWindow::wonScreen(bool won) {
+    if (won) {
+        ui->main_screen->setCurrentIndex(2);
+    } else {
+        ui->main_screen->setCurrentIndex(3);
+    }
 }
 
 
