@@ -12,6 +12,7 @@ class StackModel
 public:
     StackModel();
     CardModel* getCard();
+    CardModel* getFirstCard();
 
 private:
     vector<CardModel*> cards;

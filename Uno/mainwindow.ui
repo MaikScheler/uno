@@ -472,6 +472,23 @@ color: white;</string>
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLabel" name="draw_count">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>240</y>
+        <width>281</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 24px;
+color: white;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
@@ -484,6 +501,7 @@ color: white;</string>
      <zorder>skip_button</zorder>
      <zorder>turn_label</zorder>
      <zorder>current_color</zorder>
+     <zorder>draw_count</zorder>
     </widget>
     <widget class="QWidget" name="PickColor">
      <widget class="QPushButton" name="pick_blue">
@@ -491,8 +509,8 @@ color: white;</string>
        <rect>
         <x>230</x>
         <y>150</y>
-        <width>80</width>
-        <height>18</height>
+        <width>141</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -504,8 +522,8 @@ color: white;</string>
        <rect>
         <x>370</x>
         <y>150</y>
-        <width>80</width>
-        <height>18</height>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -517,8 +535,8 @@ color: white;</string>
        <rect>
         <x>370</x>
         <y>210</y>
-        <width>80</width>
-        <height>18</height>
+        <width>131</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
@@ -530,8 +548,8 @@ color: white;</string>
        <rect>
         <x>230</x>
         <y>210</y>
-        <width>80</width>
-        <height>18</height>
+        <width>141</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">

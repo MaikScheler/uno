@@ -45,6 +45,7 @@ private:
     void pickColor();
     void selectColor(QChar color);
     void displayColor(QChar color);
+    void countDraw(QString toDraw);
     Ui::MainWindow *ui;
     MainController *mainController;
     void configureUi();

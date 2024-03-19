@@ -53,9 +53,21 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
 
     this->drawenCards++;
 
-    if (this->drawCardLimit > 1 && this->drawCardLimit == this->drawenCards) {
+    if (this->drawCardLimit == this->drawenCards) {
+        if (this->drawCardLimit > 1) {
+            this->switchPlayer(player);
+        }
+
         this->drawCardLimit = 1;
         this->drawenCards = 1;
+    }
+
+    if (this->drawCardLimit > 1) {
+        QTcpSocket* pSocket = player->getSocket();
+
+        QTextStream os(pSocket);
+        os << "toDraw:" + QString::number(this->drawCardLimit - this->drawenCards) << "\n";
+        pSocket->flush();
     }
 }
 
@@ -85,7 +97,7 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 
     if (prevCardColor != newCardColor && prevCardNumber != newCardNumber && newCardColor != 's') return;
 
-    if (drawCardLimit > 1 && this->drawCardLimit != this->drawenCards && newCardNumber != '+') return;
+    if (drawCardLimit > 1 && this->drawCardLimit != this->drawenCards) return;
 
     this->card = playedCard;
 
@@ -102,10 +114,14 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
     this->checkWin(player);
     this->currentColor = QChar();
 
-    if (prevCardNumber == '+' && newCardNumber == '+' && this->drawCardLimit != 1) {
-        this->drawCardLimit += newCardColor == 's' ? 4 : 2;
-    } else if (newCardNumber == '+') {
+    if (newCardNumber == '+') {
         this->drawCardLimit = newCardColor == 's' ? 4 : 2;
+
+        QTcpSocket* pSocket = player->getSocket();
+
+        QTextStream os(pSocket);
+        os << "toDraw:" + QString::number(this->drawCardLimit) << "\n";
+        pSocket->flush();
     }
 
     if (newCardColor == 's') {

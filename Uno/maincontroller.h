@@ -34,6 +34,7 @@ signals:
     void displayWonScreen(bool won);
     void pickColor();
     void displayColor(QChar color);
+    void countDraw(QString toDraw);
 
 private:
     QTcpSocket *client;

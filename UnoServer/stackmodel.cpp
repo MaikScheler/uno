@@ -44,3 +44,19 @@ CardModel* StackModel::getCard()
     cards.erase(cards.begin());
     return card;
 }
+
+CardModel* StackModel::getFirstCard() {
+    CardModel* card = NULL;
+    int i = 0;
+
+    for (i < this->cards.size(); ++i;) {
+        card = cards.at(i);
+        if (!card->getName().contains("+ u o")) {
+            break;
+        }
+    }
+
+    cards.erase(cards.begin());
+    return card;
+
+}

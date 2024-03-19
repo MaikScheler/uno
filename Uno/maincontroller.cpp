@@ -91,6 +91,8 @@ void MainController::startRead(){
             emit pickColor();
         } else if (type == "displayColor") {
             emit displayColor(response[1].at(0));
+        } else if (type == "toDraw") {
+            emit countDraw(response[1]);
         }
     }
 }

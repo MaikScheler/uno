@@ -38,6 +38,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 
 void MainWindow::onStartButtonClicked() {
     ui->start_button->setDisabled(true);
+    ui->primary_card_holder->setVisible(true);
     bool isConntected = mainController->start("127.0.0.1", 8888);
 
     qDebug() << isConntected;
@@ -138,6 +139,7 @@ void MainWindow::playCard(QString cardId, QString cardName)
     ui->skip_button->setVisible(false);
 
     ui->current_color->setText("");
+    ui->draw_count->setText("");
 }
 
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
@@ -188,11 +190,17 @@ void MainWindow::displayColor(QChar color) {
 }
 
 void MainWindow::wonScreen(bool won) {
+    ui->primary_card_holder->setVisible(false);
+
     if (won) {
         ui->main_screen->setCurrentIndex(3);
     } else {
         ui->main_screen->setCurrentIndex(4);
     }
+}
+
+void MainWindow::countDraw(QString toDraw) {
+    ui->draw_count->setText("Du musst " + toDraw + "noch ziehen");
 }
 
 
@@ -211,6 +219,8 @@ void MainWindow::configureUi() {
     ui->card_stack_button->setCursor(Qt::PointingHandCursor);
     ui->start_button->setCursor(Qt::PointingHandCursor);
 
+    ui->primary_card_holder->setParent(ui->centralwidget);
+    ui->primary_card_holder->setVisible(false);
     ui->primary_card_holder->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->primary_card_holder->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->primary_card_holder->setFixedSize(1000, 171 + 50 + 50);
