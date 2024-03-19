@@ -5,6 +5,7 @@
 #include "playermodel.h"
 #include "cardmodel.h"
 #include "stackmodel.h"
+#include "logger.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ private:
     PlayerModel* currentPlayer;
     CardModel* card;
     StackModel* stack;
+    Logger* logger;
     bool isPicking = false;
     QChar currentColor = QChar();
     int drawenCards = 0;

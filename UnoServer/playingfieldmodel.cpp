@@ -3,6 +3,7 @@
 PlayingFieldModel::PlayingFieldModel()
 {
     stack = new StackModel();
+    logger = new Logger();
 }
 
 void PlayingFieldModel::addPlayer(PlayerModel *player) {
@@ -37,6 +38,8 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
 
     CardModel* card = stack->getCard();
     player->addCard(card);
+
+    logger->logToFile(player->getId(), "draw", card->getName());
 
     for(PlayerModel* p : players)
     {
@@ -79,6 +82,8 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
     }
 
     CardModel *playedCard = player->getCard(cardId);
+
+    logger->logToFile(player->getId(), "play", playedCard->getName());
 
     if(playedCard == NULL)
     {
@@ -147,6 +152,7 @@ void PlayingFieldModel::start()
 
         CardModel* card = stack->getCard();
         this->card = card;
+        logger->logToFile(-1, "play", card->getName());
         for(PlayerModel* p : players)
         {
             QTcpSocket* pSocket = p->getSocket();
@@ -160,6 +166,7 @@ void PlayingFieldModel::start()
                 CardModel* playerCard = stack->getCard();
                 p->addCard(playerCard);
                 os << "card::" + playerCard->getName() + ":" + QString::number(playerCard->getId()) + "\n";
+                logger->logToFile(p->getId(), "draw", playerCard->getName());
                 os << "card::back:0000\n";
                 pSocket->flush();
             }

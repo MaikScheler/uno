@@ -9,6 +9,7 @@ QT += network
 
 SOURCES += \
         cardmodel.cpp \
+        logger.cpp \
         main.cpp \
         playermodel.cpp \
         playingfieldmodel.cpp \
@@ -27,6 +28,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     cardmodel.h \
+    logger.h \
     playermodel.h \
     playingfieldmodel.h \
     server.h \
