@@ -17,10 +17,17 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     connect(mainController, &MainController::removePlayedCardSignal, this, &MainWindow::removePlayedCard);
     connect(mainController, &MainController::changeTurn, this, &MainWindow::changeTurn);
     connect(mainController, &MainController::displayWonScreen, this, &MainWindow::wonScreen);
+    connect(mainController, &MainController::pickColor, this, &MainWindow::pickColor);
+    connect(mainController, &MainController::displayColor, this, &MainWindow::displayColor);
 
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
     connect(ui->skip_button, &QPushButton::clicked, this, &MainWindow::skipTurn);
+
+    connect(ui->pick_red, &QPushButton::clicked, this, [this] () -> void { selectColor('r'); });
+    connect(ui->pick_green, &QPushButton::clicked, this, [this] () -> void { selectColor('g'); });
+    connect(ui->pick_yellow, &QPushButton::clicked, this, [this] () -> void { selectColor('y'); });
+    connect(ui->pick_blue, &QPushButton::clicked, this, [this] () -> void { selectColor('b'); });
 }
 
 // Override paintEvent
@@ -129,6 +136,8 @@ void MainWindow::playCard(QString cardId, QString cardName)
     ui->played_card->setScaledContents(true);
 
     ui->skip_button->setVisible(false);
+
+    ui->current_color->setText("");
 }
 
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
@@ -153,11 +162,36 @@ void MainWindow::changeTurn(bool isTurn) {
     }
 }
 
+void MainWindow::pickColor() {
+    ui->main_screen->setCurrentIndex(2);
+}
+
+void MainWindow::selectColor(QChar color) {
+    ui->main_screen->setCurrentIndex(1);
+
+    this->mainController->selectColor(color);
+}
+
+void MainWindow::displayColor(QChar color) {
+    QString colorText = "";
+    if (color == 'r') {
+        colorText = QString("Rot");
+    } else if (color == 'b') {
+        colorText = QString("Blau");
+    } else if (color == 'g') {
+        colorText = QString("Grün");
+    } else if (color == 'y') {
+        colorText = QString("Gelb");
+    }
+
+    ui->current_color->setText("Die nächstes Karte muss die Farbe " + colorText + " haben.");
+}
+
 void MainWindow::wonScreen(bool won) {
     if (won) {
-        ui->main_screen->setCurrentIndex(2);
-    } else {
         ui->main_screen->setCurrentIndex(3);
+    } else {
+        ui->main_screen->setCurrentIndex(4);
     }
 }
 

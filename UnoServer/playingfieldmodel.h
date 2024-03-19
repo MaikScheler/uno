@@ -26,6 +26,8 @@ public:
 
     void switchPlayer(PlayerModel* currentPlayer);
 
+    void pickColor(QString color, PlayerModel *player);
+
 signals:
 
 private:
@@ -33,6 +35,8 @@ private:
     PlayerModel* currentPlayer;
     CardModel* card;
     StackModel* stack;
+    bool isPicking = false;
+    QChar currentColor = QChar();
     int drawenCards = 0;
     int drawCardLimit = 1;
 

@@ -1,5 +1,6 @@
 #include "stackmodel.h"
 
+// Initalisiert das StackModel und legt alle Karten im kartenstappel an
 StackModel::StackModel()
 {
     char colors[4] = { 'r', 'g', 'b', 'y' };
@@ -14,14 +15,27 @@ StackModel::StackModel()
         {
             for(int j = 1; j <= 9; j++)
             {
-                QString cardName = c + QString::number(j);
-                CardModel *card = new CardModel(cardName);
-                cards.push_back(card);
+                createCard(c + QString::number(j));
             }
+
+            createCard(c + QString("o"));
+            createCard(c + QString("u"));
+            createCard(c + QString("+"));
         }
     }
 
+    for (int i = 1; i <= 4; i++) {
+        createCard(QString("s+"));
+        createCard(QString("sc"));
+    }
+
     random_shuffle(begin(cards), end(cards));
+}
+
+// Legt eine neue Karte an
+void StackModel::createCard(QString cardName) {
+    CardModel *card = new CardModel(cardName);
+    cards.push_back(card);
 }
 
 CardModel* StackModel::getCard()

@@ -15,6 +15,7 @@ public:
 
 private:
     vector<CardModel*> cards;
+    void createCard(QString cardName);
 };
 
 #endif // STACKMODEL_H

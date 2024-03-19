@@ -68,6 +68,8 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
         pf->playCard(data[1], player);
     } else if (event == "skip") {
         pf->skip(player);
+    } else if (event == "color") {
+        pf->pickColor(data[1], player);
     }
 
     if ( socket->state() == QTcpSocket::UnconnectedState )

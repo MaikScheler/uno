@@ -18,6 +18,7 @@ public:
     void drawCard();
     void playCard(int cardId);
     void skipTurn();
+    void selectColor(QChar color);
 
 public slots:
     void startTransfer();
@@ -31,6 +32,8 @@ signals:
     void removePlayedCardSignal(QString cardId);
     void changeTurn(bool isTurn);
     void displayWonScreen(bool won);
+    void pickColor();
+    void displayColor(QChar color);
 
 private:
     QTcpSocket *client;

@@ -55,7 +55,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Start">
      <widget class="QPushButton" name="start_button">
@@ -452,6 +452,26 @@ color: white;</string>
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="current_color">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>290</y>
+        <width>761</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 24px;
+color: white;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
@@ -463,6 +483,61 @@ color: white;</string>
      <zorder>played_card</zorder>
      <zorder>skip_button</zorder>
      <zorder>turn_label</zorder>
+     <zorder>current_color</zorder>
+    </widget>
+    <widget class="QWidget" name="PickColor">
+     <widget class="QPushButton" name="pick_blue">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>150</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>BLAU</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pick_green">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>150</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>GRÜN</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pick_yellow">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>210</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>GELB</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pick_red">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>210</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ROT</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="won">
      <widget class="QLabel" name="won_label">

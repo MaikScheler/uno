@@ -42,6 +42,9 @@ private:
     void skipTurn();
     void changeTurn(bool isTurn);
     void wonScreen(bool won);
+    void pickColor();
+    void selectColor(QChar color);
+    void displayColor(QChar color);
     Ui::MainWindow *ui;
     MainController *mainController;
     void configureUi();

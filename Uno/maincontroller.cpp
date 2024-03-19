@@ -87,6 +87,10 @@ void MainController::startRead(){
             int sendClientId = _clientId.toInt();
             bool won = sendClientId == clientId;
             emit displayWonScreen(won);
+        } else if (type == "color") {
+            emit pickColor();
+        } else if (type == "displayColor") {
+            emit displayColor(response[1].at(0));
         }
     }
 }
@@ -114,6 +118,12 @@ void MainController::skipTurn() {
 void MainController::onError(QAbstractSocket::SocketError) {
     QTcpSocket* socket = (QTcpSocket*)sender();
     qDebug() << "Socket Error: " << socket->errorString();
+}
+
+void MainController::selectColor(QChar color) {
+    QString type = QString("color");
+    vector<QString> params = {color};
+    sendMessage(type, params);
 }
 
 
