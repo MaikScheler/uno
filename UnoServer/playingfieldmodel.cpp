@@ -122,7 +122,7 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 
         for(PlayerModel* p : players)
         {
-            if (p != this->currentPlayer) {
+            if (p != player) {
                 this->notifyDrawCards(p);
             }
         }

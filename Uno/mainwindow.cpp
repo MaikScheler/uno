@@ -39,12 +39,12 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 
 void MainWindow::onStartButtonClicked() {
     ui->start_button->setDisabled(true);
-    ui->primary_card_holder->setVisible(true);
     bool isConntected = mainController->start("127.0.0.1", 8888);
 
     qDebug() << isConntected;
 
     if (isConntected) {
+        ui->primary_card_holder->setVisible(true);
         ui->main_screen->setCurrentIndex(1);
     } else {
         ui->server_error_label->show();
@@ -129,6 +129,7 @@ void MainWindow::removePlayedCard(QString cardId)
         }
     }
 
+    ui->draw_count->setText("");
 }
 
 void MainWindow::playCard(QString cardId, QString cardName)
@@ -140,7 +141,6 @@ void MainWindow::playCard(QString cardId, QString cardName)
     ui->skip_button->setVisible(false);
 
     ui->current_color->setText("");
-    ui->draw_count->setText("");
 }
 
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
