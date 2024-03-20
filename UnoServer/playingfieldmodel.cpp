@@ -48,29 +48,27 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
 
         if(player == p)
         {
-            os << "card::" + card->getName() + ":" + QString::number(card->getId());
+            os << "card::" + card->getName() + ":" + QString::number(card->getId()) + "\n";
         } else {
-            os << "card::back:0000";
+            os << "card::back:0000\n";
         }
     }
 
     this->drawenCards++;
 
+    if (this->drawCardLimit > 1) {
+        this->notifyDrawCards(player);
+    }
+
     if (this->drawCardLimit == this->drawenCards) {
         if (this->drawCardLimit > 1) {
             this->switchPlayer(player);
+            this->notifyDrawCards(player);
         }
 
         this->drawCardLimit = 1;
         this->drawenCards = 1;
-    }
-
-    if (this->drawCardLimit > 1) {
-        QTcpSocket* pSocket = player->getSocket();
-
-        QTextStream os(pSocket);
-        os << "toDraw:" + QString::number(this->drawCardLimit - this->drawenCards) << "\n";
-        pSocket->flush();
+        this->notifyDrawCards(player);
     }
 }
 
@@ -122,11 +120,12 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
     if (newCardNumber == '+') {
         this->drawCardLimit = newCardColor == 's' ? 4 : 2;
 
-        QTcpSocket* pSocket = player->getSocket();
-
-        QTextStream os(pSocket);
-        os << "toDraw:" + QString::number(this->drawCardLimit) << "\n";
-        pSocket->flush();
+        for(PlayerModel* p : players)
+        {
+            if (p != this->currentPlayer) {
+                this->notifyDrawCards(p);
+            }
+        }
     }
 
     if (newCardColor == 's') {
@@ -156,9 +155,8 @@ void PlayingFieldModel::start()
         for(PlayerModel* p : players)
         {
             QTcpSocket* pSocket = p->getSocket();
-
             QTextStream os(pSocket);
-            os << "play:" + QString::number(p->getId()) + ":" + card->getName() + ":" + QString::number(card->getId()) + "\n";
+            os << "play:" + QString::number(p->getId()) + ":" + card->getName() + ":" + QString::number(card->getId()) << "\n";
             pSocket->flush();
 
             for(int i = 1; i <= 7; i++)
@@ -227,6 +225,15 @@ void PlayingFieldModel::pickColor(QString color, PlayerModel *player) {
         os << "displayColor:" + color +  "\n";
         pSocket->flush();
     }
+}
+
+void PlayingFieldModel::notifyDrawCards(PlayerModel *player) {
+
+    QTcpSocket* pSocket = player->getSocket();
+
+    QTextStream os(pSocket);
+    os << "toDraw:" + QString::number(this->drawCardLimit - this->drawenCards) << "\n";
+    pSocket->flush();
 }
 
 void PlayingFieldModel::notifyTurn() {

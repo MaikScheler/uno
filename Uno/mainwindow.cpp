@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     connect(mainController, &MainController::displayWonScreen, this, &MainWindow::wonScreen);
     connect(mainController, &MainController::pickColor, this, &MainWindow::pickColor);
     connect(mainController, &MainController::displayColor, this, &MainWindow::displayColor);
+    connect(mainController, &MainController::countDraw, this, &MainWindow::countDraw);
 
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
@@ -200,7 +201,14 @@ void MainWindow::wonScreen(bool won) {
 }
 
 void MainWindow::countDraw(QString toDraw) {
-    ui->draw_count->setText("Du musst " + toDraw + "noch ziehen");
+    if (toDraw != "0") {
+        ui->draw_count->setVisible(true);
+        ui->draw_count->setText("Du musst noch " + toDraw + " Karte ziehen");
+        return;
+    }
+
+    ui->draw_count->setVisible(false);
+    ui->draw_count->setText("");
 }
 
 
