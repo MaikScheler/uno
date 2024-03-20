@@ -5,7 +5,7 @@ using namespace std;
 CardModel::CardModel(QString name)
 {
     this->name = name;
-    this->id = rand();
+    this->id = rand() % 10000;
 }
 
 QString CardModel::getName()

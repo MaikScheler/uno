@@ -190,6 +190,7 @@ void PlayingFieldModel::checkWin(PlayerModel *player) {
         return;
     }
 
+    logger->logToFile(player->getId(), "won");
 
     for(PlayerModel* p : players)
     {

@@ -13,7 +13,7 @@ class Logger
 public:
     Logger();
 
-    void logToFile(int clientId, QString event, QString data);
+    void logToFile(int clientId, QString event, QString data = "");
 
 private:
     filesystem::path path;
