@@ -4,9 +4,9 @@
 #include <QString>
 #include <QTcpSocket>
 #include <QHostAddress>
-#include "playingfieldmodel.h"
-#include "cardmodel.h"
-#include "playermodel.h"
+#include <vector>
+
+using namespace std;
 
 class MainController: public QObject
 {
@@ -39,7 +39,6 @@ signals:
 private:
     QTcpSocket *client;
     int clientId;
-    PlayingFieldModel *playingField;
     void sendMessage(QString& type, vector<QString>& params);
 };
 

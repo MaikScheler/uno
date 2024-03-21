@@ -4,8 +4,6 @@
 #include <QMainWindow>
 #include "maincontroller.h"
 #include "clickablelabel.h"
-#include "cardmodel.h"
-#include "playermodel.h"
 #include <QPixmap>
 #include <QPainter>
 #include <QVBoxLayout>
