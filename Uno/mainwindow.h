@@ -51,6 +51,7 @@ private:
     void configureUi();
     QVBoxLayout *scrollLayout;
     int enemyCardCounter = 0;
+    bool isTurn;
 
 };
 #endif // MAINWINDOW_H

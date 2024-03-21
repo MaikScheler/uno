@@ -55,8 +55,6 @@ void MainController::startRead(){
 
         //Empfangenen String zum Debuggen ausgeben
         qDebug() << response;
-        qDebug() << "Type: " << type;
-        qDebug() << "Message: " << message;
 
         if(type == "connected")
         {
@@ -72,7 +70,6 @@ void MainController::startRead(){
             // Card id on index 3 and card name on index 2 (message)
             if(_clientId.toInt() != clientId)
             {
-                qDebug() << "Removing card of enemy.";
                 emit removeEnemyCardSignal();
             } else {
                 emit removePlayedCardSignal(response[3]);

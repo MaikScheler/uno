@@ -42,7 +42,7 @@ private:
     int drawenCards = 0;
     int drawCardLimit = 1;
 
-    void notifyDrawCards(PlayerModel *player);
+    void notifyDrawCards(PlayerModel *player, int toDraw);
 
     void notifyPlayers();
 

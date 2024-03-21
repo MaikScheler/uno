@@ -48,15 +48,18 @@ CardModel* StackModel::getCard()
 CardModel* StackModel::getFirstCard() {
     CardModel* card = NULL;
     int i = 0;
+    QRegExp regex = QRegExp("\\+|u|o");
 
-    for (i < this->cards.size(); ++i;) {
+    for (;i < this->cards.size();) {
         card = cards.at(i);
-        if (!card->getName().contains("+ u o")) {
+        if (!(card->getName().contains(regex))) {
             break;
         }
+
+        ++i;
     }
 
-    cards.erase(cards.begin());
+    cards.erase(cards.begin() + i);
     return card;
 
 }

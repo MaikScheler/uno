@@ -55,7 +55,6 @@ void MainWindow::onStartButtonClicked() {
 }
 
 void MainWindow::drawCard(QString cardId, QString cardName) {
-    //if (player->getPrimary()) {
     if(cardName != "back")
     {
         ClickableLabel *cardLabel = new ClickableLabel(Q_NULLPTR, Qt::WindowFlags(), cardId.toInt());
@@ -74,7 +73,9 @@ void MainWindow::drawCard(QString cardId, QString cardName) {
         ui->primary_card_holder_layout->addWidget(cardLabel);
         ui->primary_card_holder_layout->addSpacerItem(spacer);
 
-        ui->skip_button->setVisible(true);
+        if (ui->draw_count->text() == "" && this->isTurn) {
+            ui->skip_button->setVisible(true);
+        }
     } else {
         enemyCardCounter++;
 
@@ -118,7 +119,6 @@ void MainWindow::removePlayedCard(QString cardId)
         ClickableLabel *widget = (ClickableLabel*)ui->primary_card_holder_layout->itemAt(i)->widget();
         if (widget != NULL && widget->objectName() == cardId)
         {
-            qDebug() << widget->objectName();
             ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(widget) + 1));
             delete widget;
         }
@@ -144,10 +144,6 @@ void MainWindow::playCard(QString cardId, QString cardName)
 }
 
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
-    //ui->primary_card_holder_layout->removeItem(ui->primary_card_holder_layout->itemAt(ui->primary_card_holder_layout->indexOf(cardLabel) + 1));
-    //delete cardLabel;
-
-    qDebug() << "Card clicked" << cardId;
     mainController->playCard(cardId);
 }
 
@@ -160,8 +156,12 @@ void MainWindow::skipTurn() {
 void MainWindow::changeTurn(bool isTurn) {
     if (isTurn) {
         ui->turn_label->setText("Du bist am Zug");
+        this->isTurn = true;
     } else {
         ui->turn_label->setText("Der Gegner ist am Zug");
+        this->isTurn = false;
+        ui->skip_button->setVisible(false);
+        ui->draw_count->setText("");
     }
 }
 
@@ -203,7 +203,7 @@ void MainWindow::wonScreen(bool won) {
 void MainWindow::countDraw(QString toDraw) {
     if (toDraw != "0") {
         ui->draw_count->setVisible(true);
-        ui->draw_count->setText("Du musst noch " + toDraw + " Karte ziehen");
+        ui->draw_count->setText("Du musst noch " + toDraw + " " + (toDraw != "1" ? "Karten" : "Karte") + " ziehen");
         return;
     }
 

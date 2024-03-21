@@ -2,6 +2,7 @@
 #define STACKMODEL_H
 
 #include <vector>
+#include <QRegExp>
 
 using namespace std;
 
