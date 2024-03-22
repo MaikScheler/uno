@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
+/*
+* Mapped alle Signale zu Slots
+* Initalisiert den Maincontroller
+*/
 MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -31,12 +34,19 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     connect(ui->pick_blue, &QPushButton::clicked, this, [this] () -> void { selectColor('b'); });
 }
 
-// Override paintEvent
+/*
+* Override paintEvent
+* Setzt das Hintergrundbild
+*/
 void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     painter.drawPixmap(0, 0, width(), height(), QPixmap(":/assets/background-image.png"));
 }
 
+/*
+* Versucht verbindung zum Server aufzubauen
+* Wenn der Start knopf gedrückt wird
+*/
 void MainWindow::onStartButtonClicked() {
     ui->start_button->setDisabled(true);
     bool isConntected = mainController->start("127.0.0.1", 8888);
@@ -54,6 +64,9 @@ void MainWindow::onStartButtonClicked() {
     ui->start_button->setDisabled(false);
 }
 
+/*
+* Legt die Karten im UI an für Spieler und Gegner
+*/
 void MainWindow::drawCard(QString cardId, QString cardName) {
     if(cardName != "back")
     {
@@ -98,6 +111,10 @@ void MainWindow::drawCard(QString cardId, QString cardName) {
     }
 }
 
+
+/*
+* Löscht eine Karte des gegners
+*/
 void MainWindow::removeEnemyCard()
 {
 
@@ -112,6 +129,9 @@ void MainWindow::removeEnemyCard()
     ui->enemy_card_counter->setText("Spieler 2 hat " + QString::number(enemyCardCounter) + " Karten");
 }
 
+/*
+* Löscht die Gespielte Karte
+*/
 void MainWindow::removePlayedCard(QString cardId)
 {
     for (int i = 0; i < ui->primary_card_holder_layout->count(); ++i)
@@ -132,6 +152,9 @@ void MainWindow::removePlayedCard(QString cardId)
     ui->draw_count->setText("");
 }
 
+/*
+* Ändert die Karte auf den Ablagestapel zu der Gespielten
+*/
 void MainWindow::playCard(QString cardId, QString cardName)
 {
     ui->played_card->setFixedSize(117, 171);
@@ -143,16 +166,27 @@ void MainWindow::playCard(QString cardId, QString cardName)
     ui->current_color->setText("");
 }
 
+/*
+* Schickt Event play an den Server
+* Wenn man auf eine Karte klickt
+*/
 void MainWindow::onCardClick(int cardId, ClickableLabel *cardLabel) {
     mainController->playCard(cardId);
 }
 
+/*
+* Schickt Event skip an den Sever
+* Zum Überspringen des Zuges
+*/
 void MainWindow::skipTurn() {
     this->mainController->skipTurn();
 
     ui->skip_button->setVisible(false);
 }
 
+/*
+* Ändert das Label wer gerade am Zug ist
+*/
 void MainWindow::changeTurn(bool isTurn) {
     if (isTurn) {
         ui->turn_label->setText("Du bist am Zug");
@@ -165,16 +199,27 @@ void MainWindow::changeTurn(bool isTurn) {
     }
 }
 
+/*
+* Lässt die Auswahl der Farbe erscheinen
+* durchs ändern des Index vom QStackedWidget
+*/
 void MainWindow::pickColor() {
     ui->main_screen->setCurrentIndex(2);
 }
 
+/*
+* Schickt Event zum Server mit der Ausgewählten Farbe
+* ändert zurück zum spiel durch das ändern des Index vom QStackedWidget
+*/
 void MainWindow::selectColor(QChar color) {
     ui->main_screen->setCurrentIndex(1);
 
     this->mainController->selectColor(color);
 }
 
+/*
+* Zeigt die Ausgewählte Farbe an
+*/
 void MainWindow::displayColor(QChar color) {
     QString colorText = "";
     if (color == 'r') {
@@ -190,6 +235,10 @@ void MainWindow::displayColor(QChar color) {
     ui->current_color->setText("Die nächstes Karte muss die Farbe " + colorText + " haben.");
 }
 
+/*
+* Zeigt den Gewonnen / Verloren Screen an
+* durch ändern des Index vom QStackedWidget
+*/
 void MainWindow::wonScreen(bool won) {
     ui->primary_card_holder->setVisible(false);
 
@@ -200,6 +249,9 @@ void MainWindow::wonScreen(bool won) {
     }
 }
 
+/*
+* Zeigt an wie viele Karten gezogen werden müssen
+*/
 void MainWindow::countDraw(QString toDraw) {
     if (toDraw != "0") {
         ui->draw_count->setVisible(true);
@@ -211,17 +263,26 @@ void MainWindow::countDraw(QString toDraw) {
     ui->draw_count->setText("");
 }
 
-
+/*
+* Schickt Event an den Server draw
+* (zum ziehen von Karten)
+*/
 void MainWindow::onCardStackButtonClicked()
 {
     mainController->drawCard();
 }
 
+/*
+* Zeigt den Fehler vom Server an
+*/
 void MainWindow::showServerError(QString error) {
     ui->server_error_label->show();
     ui->server_error_label->setText(error);
 }
 
+/*
+* Initaliert / Ändert alle Komponenten zu dem gewünschten start Wert im UI
+*/
 void MainWindow::configureUi() {
     this->setFixedSize(1000, 563);
     ui->card_stack_button->setCursor(Qt::PointingHandCursor);
@@ -256,6 +317,10 @@ void MainWindow::configureUi() {
     ui->server_error_label->hide();
 }
 
+
+/*
+* Löscht das UI
+*/
 MainWindow::~MainWindow()
 {
     delete ui;
