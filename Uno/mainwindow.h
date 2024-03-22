@@ -8,6 +8,7 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QScrollBar>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -50,6 +51,9 @@ private:
     QVBoxLayout *scrollLayout;
     int enemyCardCounter = 0;
     bool isTurn;
+
+    void sendUserMessage();
+    void displayMessage(QString message);
 
 };
 #endif // MAINWINDOW_H

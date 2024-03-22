@@ -126,7 +126,7 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_4">
       <property name="geometry">
        <rect>
-        <x>730</x>
+        <x>700</x>
         <y>100</y>
         <width>131</width>
         <height>191</height>
@@ -151,7 +151,7 @@ color: black;</string>
      <widget class="QLabel" name="card_deck">
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>670</x>
         <y>100</y>
         <width>131</width>
         <height>191</height>
@@ -170,7 +170,7 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_2">
       <property name="geometry">
        <rect>
-        <x>710</x>
+        <x>680</x>
         <y>100</y>
         <width>131</width>
         <height>191</height>
@@ -189,7 +189,7 @@ color: black;</string>
      <widget class="QLabel" name="card_deck_3">
       <property name="geometry">
        <rect>
-        <x>720</x>
+        <x>690</x>
         <y>100</y>
         <width>131</width>
         <height>191</height>
@@ -208,7 +208,7 @@ color: black;</string>
      <widget class="QPushButton" name="card_stack_button">
       <property name="geometry">
        <rect>
-        <x>700</x>
+        <x>670</x>
         <y>100</y>
         <width>161</width>
         <height>191</height>
@@ -489,6 +489,54 @@ color: white;</string>
        <string/>
       </property>
      </widget>
+     <widget class="QLineEdit" name="chat_input">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>250</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QScrollArea" name="chat_text">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>0</y>
+        <width>151</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="chat_text_area">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>149</width>
+         <height>239</height>
+        </rect>
+       </property>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>160</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="chat_text_layout">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
      <zorder>card_deck</zorder>
      <zorder>card_deck_2</zorder>
      <zorder>card_deck_3</zorder>
@@ -502,6 +550,8 @@ color: white;</string>
      <zorder>turn_label</zorder>
      <zorder>current_color</zorder>
      <zorder>draw_count</zorder>
+     <zorder>chat_input</zorder>
+     <zorder>chat_text</zorder>
     </widget>
     <widget class="QWidget" name="PickColor">
      <widget class="QPushButton" name="pick_blue">

@@ -290,3 +290,13 @@ void PlayingFieldModel::notifyTurn() {
     }
 }
 
+void PlayingFieldModel::chatMessage(QString message) {
+    for(PlayerModel* p : players)
+    {
+        QTcpSocket* pSocket = p->getSocket();
+
+        QTextStream os(pSocket);
+        os << "message:" + message +  "\n";
+        pSocket->flush();
+    }
+}

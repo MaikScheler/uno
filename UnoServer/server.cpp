@@ -2,6 +2,9 @@
 
 #include <QDateTime>
 
+/*
+* Opens Connection on port 8888
+*/
 Server::Server(QObject* parent): QObject(parent)
 {
     client=NULL;
@@ -11,6 +14,9 @@ Server::Server(QObject* parent): QObject(parent)
     server->listen(QHostAddress::Any, 8888);
 }
 
+/*
+* Schließt die Verbindung
+*/
 Server::~Server()
 {
     server->close();
@@ -19,6 +25,9 @@ Server::~Server()
     server->deleteLater();
 }
 
+/*
+* Weißt den Spieler seine id zu und packt ihn in eine lobby (Spielfeld)
+*/
 void Server::acceptConnection()
 {
     //Verbindung annehmen
@@ -32,6 +41,9 @@ void Server::acceptConnection()
     });
 }
 
+/*
+* Liest und verabrebeitet Nachrichten von den Spielern
+*/
 void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
 
     // Dieser Slot wird aufgerufen, sobald der Client Daten an den Server sendet
@@ -50,6 +62,7 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     qDebug() << "Event: " << event;
     qDebug() << "Requesting player id: " << player->getId();
 
+    // Event für erste verbinden
     if(event == "connect")
     {
         os << "connected:" << player->getId();
@@ -60,16 +73,28 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
         {
             pf->start();
         }
-    } else if(event == "draw")
+    }
+    // Event fürs Karte ziehen
+    else if(event == "draw")
     {
         pf->drawCard(player);
-    } else if(event == "play")
+    }
+    // Event fürs Spielen einer Karte
+    else if(event == "play")
     {
         pf->playCard(data[1], player);
-    } else if (event == "skip") {
+    }
+    // Event für überspringen des zuges
+    else if (event == "skip") {
         pf->skip(player);
-    } else if (event == "color") {
+    }
+    // Event für den Farbwechsel (Farbwechselkarte)
+    else if (event == "color") {
         pf->pickColor(data[1], player);
+    }
+    // Event für Chat funktion
+    else if (event == "message") {
+        pf->chatMessage(data[1]);
     }
 
     if ( socket->state() == QTcpSocket::UnconnectedState )
@@ -78,6 +103,9 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     }
 }
 
+/*
+* Erstellt oder weißt den Spieler eine Lobby zu
+*/
 PlayingFieldModel* Server::assignOrCreateLobby(PlayerModel *player)
 {
 

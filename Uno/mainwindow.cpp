@@ -24,6 +24,9 @@ MainWindow::MainWindow(QWidget *parent, MainController *mainController)
     connect(mainController, &MainController::displayColor, this, &MainWindow::displayColor);
     connect(mainController, &MainController::countDraw, this, &MainWindow::countDraw);
 
+    connect(mainController, &MainController::displayMessage, this, &MainWindow::displayMessage);
+    connect(ui->chat_input, &QLineEdit::returnPressed, this, &MainWindow::sendUserMessage);
+
     connect(ui->start_button, &QPushButton::clicked, this, &MainWindow::onStartButtonClicked);
     connect(ui->card_stack_button, &QPushButton::clicked, this, &MainWindow::onCardStackButtonClicked);
     connect(ui->skip_button, &QPushButton::clicked, this, &MainWindow::skipTurn);
@@ -281,6 +284,35 @@ void MainWindow::showServerError(QString error) {
 }
 
 /*
+* Schickt Spieler chat nachricht an server
+*/
+void MainWindow::sendUserMessage() {
+    QString message = this->ui->chat_input->text();
+
+    this->mainController->sendUserMessage(message);
+
+    this->ui->chat_input->clear();
+}
+
+/*
+* Display Chat Nachrichten
+*/
+void MainWindow::displayMessage(QString message) {
+
+    QLabel *label = new QLabel;
+    label->setText(message);
+    label->setWordWrap(true);
+    label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    label->setTextFormat(Qt::AutoText);
+    label->setMaximumWidth(ui->chat_text->width());
+
+    this->ui->chat_text_layout->addWidget(label);
+
+    this->ui->chat_text->verticalScrollBar()->setValue(this->ui->chat_text->verticalScrollBar()->maximum());
+}
+
+
+/*
 * Initaliert / Ändert alle Komponenten zu dem gewünschten start Wert im UI
 */
 void MainWindow::configureUi() {
@@ -310,6 +342,16 @@ void MainWindow::configureUi() {
     ui->scrollAreaWidgetContents_Enemy->setFixedHeight(ui->enemy_card_holder->height());
 
     ui->enemy_card_holder->widget()->setLayout(ui->enemy_card_holder_layout);
+
+
+    ui->chat_text->setWidgetResizable(true);
+    ui->chat_text->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->chat_text_layout->setStretch(1,0);
+    ui->chat_text_layout->setAlignment(Qt::AlignTop);
+    ui->chat_text_layout->setContentsMargins(0, 0, 0, 0);
+    ui->chat_text_area->setFixedWidth(ui->chat_text->width());
+    ui->chat_text->widget()->setLayout(ui->chat_text_layout);
+
 
     ui->skip_button->setVisible(false);
 

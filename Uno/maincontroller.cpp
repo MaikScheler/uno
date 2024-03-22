@@ -121,6 +121,10 @@ void MainController::startRead(){
         else if (type == "toDraw") {
             emit countDraw(response[1]);
         }
+        // Event für chat Nachrichten
+        else if (type == "message") {
+            emit displayMessage(response[1]);
+        }
     }
 }
 
@@ -184,4 +188,13 @@ void MainController::sendMessage(QString& type, vector<QString>& params) {
   const char *c_str = ba.data();
 
   client->write( c_str, data.length()+1 );
+}
+
+/*
+* Schickt Chat Nachricht an den Server
+*/
+void MainController::sendUserMessage(QString message) {
+    QString type = QString("message");
+    vector<QString> params = {message};
+    sendMessage(type, params);
 }

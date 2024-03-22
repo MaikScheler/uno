@@ -20,6 +20,8 @@ public:
     void skipTurn();
     void selectColor(QChar color);
 
+    void sendUserMessage(QString message);
+
 public slots:
     void startTransfer();
     void startRead();
@@ -35,6 +37,8 @@ signals:
     void pickColor();
     void displayColor(QChar color);
     void countDraw(QString toDraw);
+
+    void displayMessage(QString message);
 
 private:
     QTcpSocket *client;
