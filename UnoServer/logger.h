@@ -2,8 +2,8 @@
 #define LOGGER_H
 
 #include <QString>
-//#include <filesystem>
-//#include <fstream>
+#include <filesystem>
+#include <fstream>
 
 using namespace std;
 
@@ -16,7 +16,7 @@ public:
     void logToFile(int clientId, QString event, QString data = "");
 
 private:
-    //filesystem::path path;
+    filesystem::path path;
 };
 
 #endif // LOGGER_H
