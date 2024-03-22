@@ -1,0 +1,44 @@
+<mxfile host="app.diagrams.net" modified="2024-03-22T07:27:21.015Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="Sw5Bxe8TfK-X77kwFdi2" version="24.0.7" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="882" dy="509" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="MainController" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="300" y="260" width="380" height="420" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="- client: QTcpSocket&#xa;- clientId: int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="26" width="380" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--4" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="80" width="380" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="zkfFHV4jXpPFQw0GAbJ--5" value="+ MainController(QObject* parent = 0)&#xa;+ ~MainController()&#xa;+ bool start( QString address, quint16 port )&#xa;+ void drawCard()&#xa;+ void playCard(int cardId)&#xa;+ void skipTurn()&#xa;+ void selectColor(QChar color)&#xa;+ void slot startTransfer()&#xa;+ void slot startRead()&#xa;+ void slot onError(QAbstractSocket::SocketError)&#xa;+ void signal drawCardSignal(QString cardId, QString cardName)&#xa;+ void signal playCardSignal(QString cardId, QString cardName)&#xa;+ void signal removeEnemyCardSignal()&#xa;+ void signal removePlayedCardSignal(QString cardId)&#xa;+ void signal changeTurn(bool isTurn)&#xa;+ void signal displayWonScreen(bool won)&#xa;+ void signal pickColor()&#xa;+ void signal displayColor(QChar color)&#xa;+ void signal countDraw(QString toDraw)&#xa;&#xa;- void sendMessage(QString&amp; type, vector&lt;QString&gt;&amp; params)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+          <mxGeometry y="88" width="380" height="332" as="geometry" />
+        </mxCell>
+        <mxCell id="llNL7SAflPxEFZb4hBW--1" value="MainController" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="827" y="230" width="450" height="480" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="llNL7SAflPxEFZb4hBW--2" value="- scrollLayout: QVBoxLayout&#xa;- enemyCardCounter: int&#xa;- isTurn: bool&#xa;- ui: Ui::MainWindow&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="llNL7SAflPxEFZb4hBW--1">
+          <mxGeometry y="26" width="450" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="llNL7SAflPxEFZb4hBW--3" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="llNL7SAflPxEFZb4hBW--1">
+          <mxGeometry y="110" width="450" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="llNL7SAflPxEFZb4hBW--4" value="+ MainWindow(QWidget *parent = nullptr, MainController *mainController = NULL)&#xa;+ ~MainWindow()&#xa;+ void showServerError(QString error)&#xa;&#xa;+ void signal connectionFailed()&#xa;&#xa;+ void signal drawCard(QString cardId, QString cardName)&#xa;+ void signal playCard(QString cardId, QString cardName)&#xa;+ void signal onCardClick(int cardId, ClickableLabel *cardLabel)&#xa;+ void signal removeEnemyCard()&#xa;+ void signal removePlayedCard(QString cardId)&#xa;&#xa;- void paintEvent(QPaintEvent *event)&#xa;- void onStartButtonClicked()&#xa;- void onCardStackButtonClicked()&#xa;- void skipTurn()&#xa;- void changeTurn(bool isTurn)&#xa;- void wonScreen(bool won)&#xa;- void pickColor()&#xa;- void selectColor(QChar color)&#xa;- void displayColor(QChar color)&#xa;- void countDraw(QString toDraw)&#xa;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="llNL7SAflPxEFZb4hBW--1">
+          <mxGeometry y="118" width="450" height="332" as="geometry" />
+        </mxCell>
+        <mxCell id="llNL7SAflPxEFZb4hBW--6" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="llNL7SAflPxEFZb4hBW--1" target="zkfFHV4jXpPFQw0GAbJ--0">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="910" y="560" as="sourcePoint" />
+            <mxPoint x="960" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
