@@ -1,31 +1,49 @@
 #include "playermodel.h"
 
+/*
+* Setz den Socket und gibt den Spieler eine Unique Id
+*/
 PlayerModel::PlayerModel(QTcpSocket *socket)
 {
     id = rand() % 100;
     this->socket = socket;
 }
 
+/*
+* Getter für Id
+*/
 int PlayerModel::getId()
 {
     return id;
 }
 
+/*
+* Getter für Name
+*/
 QString PlayerModel::getName()
 {
     return name;
 }
 
+/*
+* Getter für Socket
+*/
 QTcpSocket* PlayerModel::getSocket()
 {
     return socket;
 }
 
+/*
+* Fügt dem Spieler eine weitere Karte zu
+*/
 void PlayerModel::addCard(CardModel *card)
 {
     cards.push_back(card);
 }
 
+/*
+* Getter für Karte
+*/
 CardModel* PlayerModel::getCard(QString cardId)
 {
     auto isValueMatch = [&cardId](const CardModel* c) {
@@ -38,6 +56,9 @@ CardModel* PlayerModel::getCard(QString cardId)
     return cards.at(index);
 }
 
+/*
+* Löscht Karte vom Spieler
+*/
 void PlayerModel::removeCard(QString cardId)
 {
     auto it = find_if(this->cards.begin(), this->cards.end(), [&cardId](CardModel *card) {return card->getId() == cardId.toInt();});
@@ -52,6 +73,9 @@ void PlayerModel::removeCard(QString cardId)
     }
 }
 
+/*
+* Gibt die Anzahl der Karten vom Spieler zurück
+*/
 int PlayerModel::getCardCount() {
     return this->cards.size();
 }

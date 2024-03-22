@@ -1,6 +1,8 @@
 #include "stackmodel.h"
 
-// Initalisiert das StackModel und legt alle Karten im kartenstappel an
+/*
+* Initalisiert das StackModel und legt alle Karten im kartenstappel an
+*/
 StackModel::StackModel()
 {
     char colors[4] = { 'r', 'g', 'b', 'y' };
@@ -32,12 +34,17 @@ StackModel::StackModel()
     random_shuffle(begin(cards), end(cards));
 }
 
-// Legt eine neue Karte an
+/*
+* Legt eine neue Karte an
+*/
 void StackModel::createCard(QString cardName) {
     CardModel *card = new CardModel(cardName);
     cards.push_back(card);
 }
 
+/*
+* Gibt die oberste Karte zurück
+*/
 CardModel* StackModel::getCard()
 {
     CardModel* card = cards.at(0);
@@ -45,6 +52,9 @@ CardModel* StackModel::getCard()
     return card;
 }
 
+/*
+* Gibt die erste Karte zurück die keine plus, aussetzten oder Retour karte ist
+*/
 CardModel* StackModel::getFirstCard() {
     CardModel* card = NULL;
     int i = 0;
@@ -61,5 +71,4 @@ CardModel* StackModel::getFirstCard() {
 
     cards.erase(cards.begin() + i);
     return card;
-
 }

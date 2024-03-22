@@ -1,5 +1,8 @@
 #include "logger.h"
 
+/*
+* Legt eine Datei fürs Loggen an
+*/
 Logger::Logger()
 {
     path = filesystem::current_path() += "/game_" + to_string(rand() % 10000) + ".csv";
@@ -8,6 +11,9 @@ Logger::Logger()
     ofs.close();
 }
 
+/*
+* Schreibt eine Zeile in die CSV
+*/
 void Logger::logToFile(int clientId, QString event, QString data)
 {
     ofstream ofs;

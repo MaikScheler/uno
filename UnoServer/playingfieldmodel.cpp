@@ -1,15 +1,25 @@
 #include "playingfieldmodel.h"
 
+/*
+* Legt pro Spieltfeld einen neuen Log und einen Stack an
+*/
 PlayingFieldModel::PlayingFieldModel()
 {
     stack = new StackModel();
     logger = new Logger();
 }
 
+
+/*
+* Fügt dem Spielefeld einen Spieler hinzu
+*/
 void PlayingFieldModel::addPlayer(PlayerModel *player) {
     this->players.push_back(player);
 }
 
+/*
+* Gibt einen Spieler anhand seiner id zurück
+*/
 PlayerModel* PlayingFieldModel::getPlayer(int clientId) {
     auto it = find_if(this->players.begin(), this->players.end(), [&clientId](PlayerModel *player) {return player->getId() == clientId;});
 
@@ -21,15 +31,20 @@ PlayerModel* PlayingFieldModel::getPlayer(int clientId) {
 
         return this->players.at(index);
     }
-
 }
 
-
+/*
+* Schaut ob in dem Spielfeld noch platz für einen weiteren Spieler ist
+*/
 bool PlayingFieldModel::hasSpace()
 {
     return players.size() < 2;
 }
 
+/*
+* Spieler zieht eine Karte
+* Überprüft ob spieler Karten ziehen darf und schickt event an spieler
+*/
 void PlayingFieldModel::drawCard(PlayerModel *player)
 {
     if (this->currentPlayer != player || this->drawCardLimit == this->drawenCards) {
@@ -71,6 +86,10 @@ void PlayingFieldModel::drawCard(PlayerModel *player)
     }
 }
 
+/*
+* Spieler legt Karte
+* Überprüft ob spieler die Karte legen darf und schickt event an spieler
+*/
 void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
 {
     this->drawenCards = 0;
@@ -145,6 +164,9 @@ void PlayingFieldModel::playCard(QString cardId, PlayerModel *player)
     }
 }
 
+/*
+* Startet das spiel und gibt spieler 7 start karten
+*/
 void PlayingFieldModel::start()
 {
     if(players.size() == 2)
@@ -176,6 +198,10 @@ void PlayingFieldModel::start()
     this->notifyTurn();
 }
 
+/*
+* Schaut ob spieler seinen Spielzug überspringen darf
+* und schickt event
+*/
 void PlayingFieldModel::skip(PlayerModel* player) {
     if (this->drawCardLimit != 1) {
         return;
@@ -185,6 +211,9 @@ void PlayingFieldModel::skip(PlayerModel* player) {
     this->switchPlayer(player);
 }
 
+/*
+* Schaut ob spieler gewonnen hat und schickt event an alle Spieler wenn Gewonnen
+*/
 void PlayingFieldModel::checkWin(PlayerModel *player) {
     if (player->getCardCount() != 0) {
         return;
@@ -202,6 +231,9 @@ void PlayingFieldModel::checkWin(PlayerModel *player) {
     }
 }
 
+/*
+* Tauscht den spielzug und senden Event an Spieler
+*/
 void PlayingFieldModel::switchPlayer(PlayerModel* currentPlayer) {
     for(PlayerModel* p : players)
     {
@@ -213,6 +245,10 @@ void PlayingFieldModel::switchPlayer(PlayerModel* currentPlayer) {
     this->notifyTurn();
 }
 
+/*
+* Spieler pickt Farbe senden Event welche Farbe an alle Spieler
+* und wechselt den Spieler
+*/
 void PlayingFieldModel::pickColor(QString color, PlayerModel *player) {
     this->currentColor = color.at(0);
 
@@ -229,6 +265,9 @@ void PlayingFieldModel::pickColor(QString color, PlayerModel *player) {
     }
 }
 
+/*
+* Schickt Event an Spieler wie viele Karten noch gezogen werden
+*/
 void PlayingFieldModel::notifyDrawCards(PlayerModel *player, int toDraw) {
     QTcpSocket* pSocket = player->getSocket();
 
@@ -237,6 +276,9 @@ void PlayingFieldModel::notifyDrawCards(PlayerModel *player, int toDraw) {
     pSocket->flush();
 }
 
+/*
+* Schickt Event an Spieler wer am Zug ist
+*/
 void PlayingFieldModel::notifyTurn() {
     for(PlayerModel* p : players)
     {
