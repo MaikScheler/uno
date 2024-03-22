@@ -94,7 +94,7 @@ void Server::startRead(PlayerModel* player, PlayingFieldModel* pf){
     }
     // Event für Chat funktion
     else if (event == "message") {
-        pf->chatMessage(data[1]);
+        pf->chatMessage(data[1], player);
     }
 
     if ( socket->state() == QTcpSocket::UnconnectedState )

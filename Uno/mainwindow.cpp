@@ -297,10 +297,10 @@ void MainWindow::sendUserMessage() {
 /*
 * Display Chat Nachrichten
 */
-void MainWindow::displayMessage(QString message) {
+void MainWindow::displayMessage(bool you, QString message) {
 
     QLabel *label = new QLabel;
-    label->setText(message);
+    label->setText((you ? "Du: " : "Gegner: ") + message);
     label->setWordWrap(true);
     label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     label->setTextFormat(Qt::AutoText);

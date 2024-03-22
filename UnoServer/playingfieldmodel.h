@@ -29,7 +29,7 @@ public:
 
     void pickColor(QString color, PlayerModel *player);
 
-    void chatMessage(QString message);
+    void chatMessage(QString message, PlayerModel *player);
 
 signals:
 

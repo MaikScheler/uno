@@ -38,7 +38,7 @@ signals:
     void displayColor(QChar color);
     void countDraw(QString toDraw);
 
-    void displayMessage(QString message);
+    void displayMessage(bool you, QString message);
 
 private:
     QTcpSocket *client;

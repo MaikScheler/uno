@@ -123,7 +123,7 @@ void MainController::startRead(){
         }
         // Event für chat Nachrichten
         else if (type == "message") {
-            emit displayMessage(response[1]);
+            emit displayMessage((clientId == _clientId.toInt()), response[2]);
         }
     }
 }

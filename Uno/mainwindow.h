@@ -53,7 +53,7 @@ private:
     bool isTurn;
 
     void sendUserMessage();
-    void displayMessage(QString message);
+    void displayMessage(bool you, QString message);
 
 };
 #endif // MAINWINDOW_H
